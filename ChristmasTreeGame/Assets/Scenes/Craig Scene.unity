@@ -2251,6 +2251,7 @@ GameObject:
   - component: {fileID: 1632953883}
   - component: {fileID: 1632953882}
   - component: {fileID: 1632953881}
+  - component: {fileID: 1632953884}
   m_Layer: 0
   m_Name: GameSystem
   m_TagString: Untagged
@@ -2305,6 +2306,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1632953884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632953880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b815d36c9b22b74ca4a7a9c8f871617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sleighPrefab: {fileID: 5396668542723575049, guid: 7a06a81456d2c7747a781ade38f83e5b, type: 3}
+  christmasTreePrefabs:
+  - {fileID: 5497849657524840347, guid: 1feafdb372b586a418dd1b34502cd631, type: 3}
+  - {fileID: 8283266551739794927, guid: a0b5717137e49ec4f9d923c457c08b26, type: 3}
+  christmasTreeOffset: {x: -1.75, y: 0.5, z: 0}
+  orderStartPositon: {x: 0, y: 0, z: 0}
+  orderStartRotation: {x: 0, y: 0, z: 0}
+  orderOOBXPosition: 50
 --- !u!1 &1702291025
 GameObject:
   m_ObjectHideFlags: 3

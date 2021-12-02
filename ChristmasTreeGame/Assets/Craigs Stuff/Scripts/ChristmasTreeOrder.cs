@@ -24,13 +24,15 @@ public class ChristmasTreeOrder
     
     private float speed;
     private ChristmasTreeSize christmasTreeSize;
-    private List<bool> decorationPlaced;
+    private List<bool> decorationPlaced = new List<bool>();
     private int points;
     private List<DecorationType> decorationsRequired;
     private ChristmasTreeProgressState progress;
     public int Points { get => points; }
     public List<DecorationType> DecorationsRequired { get => decorationsRequired; }
     public ChristmasTreeProgressState Progress { get => progress; }
+    public ChristmasTreeSize ChristmasTreeSize { get => christmasTreeSize; }
+    public float Speed { get => speed; }
 
     public ChristmasTreeOrder(List<DecorationType> decorationsRequired, float speed, ChristmasTreeSize christmasTreeSize )
     {
