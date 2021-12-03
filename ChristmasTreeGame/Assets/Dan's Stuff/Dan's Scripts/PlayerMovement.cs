@@ -26,23 +26,17 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Grab variables")]
 
-    [SerializeField] private bool grabedObject = false;
-    [SerializeField] private Transform point;
-    [Range(0, 10f)]
-    [SerializeField] private float range = 1f;
-    [SerializeField]private bool holdingObject = false;
-    private bool holdingTimer = false;
-    private bool isButtonDown = false;
-
-
-    [SerializeField]private float currentTime = 0f;
+    public static bool grabedObject = false;
+    
+    
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
-        holdingObject = false;
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -90,48 +84,14 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        currentTime += Time.deltaTime;
-        if(currentTime >= 0.2f && grabedObject)
-        {
-            currentTime = 0f;
-            GrabObject();
-        }
-
-
+        
 
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
 
-    private void GrabObject()
-    {
-        LayerMask objectMask = LayerMask.GetMask("Objects");
+    
 
-        Collider[] objectsHit = Physics.OverlapSphere(point.position, range, objectMask);
-
-        foreach(Collider objects in objectsHit)
-        {
-            Debug.Log("Grab working");
-            if (!holdingObject)
-            {
-                objects.gameObject.GetComponent<Rigidbody>().useGravity = false;
-                objects.transform.parent = gameObject.transform;
-                objects.transform.position = point.transform.position;
-                holdingObject = true;
-            }
-            else if (holdingObject)
-            {
-                objects.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                objects.transform.parent = null;
-                holdingObject = false;
-            }
-        }
-        
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(point.position, range);
-    }
+    
 }
