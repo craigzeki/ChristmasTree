@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 4562331809300821427}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,7 +245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTime: 0
-  point: {fileID: 5016798908221134723}
   range: 1
   holdingObject: 0
 --- !u!1 &5016798908221134722
