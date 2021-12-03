@@ -6,6 +6,7 @@ public enum ChristmasTreeProgressState : int
 {
     NotStarted = 0,
     InProgress,
+    Paused,
     Complete,
     Failed,
     //New states here
@@ -44,6 +45,7 @@ public class ChristmasTreeOrder
         
         if(decorationsRequired != null)
         {
+            //populate the decorationPlaced list based on number of decorations in decorationsRequired
             foreach (DecorationType decoType in decorationsRequired)
             {
                 decorationPlaced.Add(false);
@@ -56,7 +58,22 @@ public class ChristmasTreeOrder
         
     }
 
-    bool CheckDecorationFulfilled(int decorationIndex)
+    public bool CheckAndPlaceDecoration(int decorationIndex, int decorationPoints)
+    {
+        bool result = false;
+
+            //check if hasn't been placed yet
+            if (!CheckDecorationFulfilled(decorationIndex))
+            {
+                decorationPlaced[decorationIndex] = true;
+                points += decorationPoints;
+                result = true;
+            }
+ 
+        return result;
+    }
+
+    public bool CheckDecorationFulfilled(int decorationIndex)
     {
         bool result = false;
 

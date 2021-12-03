@@ -66,8 +66,8 @@ public class GameSystem : MonoBehaviour
     {
         levelCompleteCanvas.enabled = false;
         pauseCanvas.enabled = false;
-        inPlayCanvas.enabled = false;
-        menuCanvas.enabled = true;
+        inPlayCanvas.enabled = true;
+        menuCanvas.enabled = false;
         currentGameState = GameStates.Menu;
         newGameState = currentGameState;
         CameraDirector.Instance.SetCamera(CameraDirector.CameraList.InPlayCam);

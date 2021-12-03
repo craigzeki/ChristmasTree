@@ -5,8 +5,7 @@ using UnityEngine;
 public enum DecorationType : int
 {
     Star = 0,
-    Lights,
-    Tinsel,
+    Bow,
     Bauble,
     //New decorations here
     NumOfDecorations

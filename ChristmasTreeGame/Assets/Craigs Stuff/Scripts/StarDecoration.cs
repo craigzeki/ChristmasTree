@@ -6,7 +6,7 @@ public class StarDecoration : Decoration
 {
 
     private int bonusMultiplier = 2;
-    public StarDecoration(DecorationType decorationType, int points, int bonusMultiplier) : base(decorationType, points)
+    public StarDecoration(int points, int bonusMultiplier) : base(DecorationType.Star, points)
     {
         this.bonusMultiplier = bonusMultiplier;
     }

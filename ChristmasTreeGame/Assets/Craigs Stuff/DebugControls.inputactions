@@ -1,0 +1,64 @@
+{
+    "name": "DebugControls",
+    "maps": [
+        {
+            "name": "Debug",
+            "id": "4b407444-8009-4b55-af65-40bc87062e6c",
+            "actions": [
+                {
+                    "name": "SpawnOrder",
+                    "type": "Button",
+                    "id": "fe326489-b49e-4c8a-99b9-57511382f6c5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "a9c13e39-2580-403c-b781-ce40c0a01b42",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3ad1d9a1-65fa-48d1-b41e-b544b9b1c6f9",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SpawnOrder",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3df98d6f-9d4f-44ba-ac11-a2f201ef6cf2",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

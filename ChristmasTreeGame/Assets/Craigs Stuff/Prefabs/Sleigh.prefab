@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &126224074466460140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5876197528660942322}
+  - component: {fileID: 6148509742239406774}
+  m_Layer: 0
+  m_Name: CloudMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5876197528660942322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126224074466460140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.35, y: 1.92, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1426162111430791356}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6148509742239406774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126224074466460140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03ca7d38a1b1eb043823e06c8834edb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decorations2D:
+  - {fileID: 625113636573336171, guid: b27b0a57ea1c885478ee88b1cb72ff5c, type: 3}
+  - {fileID: 1474833657524008495, guid: 4abfe452cd7b231498d4a3ed5303f1e9, type: 3}
+  - {fileID: 3314600215903106669, guid: f976b6fc99b859d478cd6b68d2fa0652, type: 3}
+  decorationsComplete2D:
+  - {fileID: 21300000, guid: 8d6a953a189027541b99d54908847e58, type: 3}
+  - {fileID: 21300000, guid: 05bc632a431851d469499a36bffe30a2, type: 3}
+  - {fileID: 21300000, guid: 1f93e9b088b390a4ba6463ad534de390, type: 3}
+  cloudPrefab: {fileID: 2936364817866686021, guid: d3c90c94906c68b468d383cc61ddbbf8, type: 3}
 --- !u!1 &967203297961594877
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,6 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1426162111430791356}
   - component: {fileID: 7025747156750107227}
+  - component: {fileID: 6221010411726314680}
   m_Layer: 0
   m_Name: Sleigh
   m_TagString: Untagged
@@ -222,6 +275,7 @@ Transform:
   - {fileID: 1194939970324780236}
   - {fileID: 6615174719699075050}
   - {fileID: 1219863369183660897}
+  - {fileID: 5876197528660942322}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -237,6 +291,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b7b553a2dcc264c979484168ea2254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paused: 0
+--- !u!65 &6221010411726314680
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5396668542723575049}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -1.75, y: 0.5, z: -0.5}
 --- !u!1 &7444343472582701543
 GameObject:
   m_ObjectHideFlags: 0
