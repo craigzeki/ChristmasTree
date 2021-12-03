@@ -15,19 +15,28 @@ public class PlayerMovement : MonoBehaviour
     private bool groundedPlayer;
 
     private Vector2 movementInput = Vector2.zero;
-    private bool jumped = false;
-    
 
+    private Vector2 currentInputVector;
+    private Vector2 smoothInputVelocity;
+    [SerializeField] private float smoothInputSpeed = 0.2f;
+
+    private bool jumped = false;
+
+    [SerializeField] private float rotationSpeed = 0.1f;
 
     [Header("Grab variables")]
 
-    private bool grabedObject = false;
+    [SerializeField] private bool grabedObject = false;
     [SerializeField] private Transform point;
     [Range(0, 10f)]
     [SerializeField] private float range = 1f;
     [SerializeField]private bool holdingObject = false;
     private bool holdingTimer = false;
     private bool isButtonDown = false;
+
+
+    [SerializeField]private float currentTime = 0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+        movementInput = Vector2.SmoothDamp(movementInput, currentInputVector, ref smoothInputVelocity, smoothInputSpeed);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -48,8 +58,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnGrab(InputAction.CallbackContext context)
     {
-        grabedObject = context.action.triggered;
         
+        grabedObject = context.action.triggered;
+
     }
 
 
@@ -65,26 +76,33 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        if(move != Vector3.zero)
+        if(move.sqrMagnitude > 0.1f)
         {
-            gameObject.transform.forward = move;
+            gameObject.transform.LookAt(transform.position + move);
+
+
         }
 
-        if(jumped && groundedPlayer)
+        if (jumped && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
 
 
-        if (grabedObject)
+
+        currentTime += Time.deltaTime;
+        if(currentTime >= 0.2f && grabedObject)
         {
+            currentTime = 0f;
             GrabObject();
         }
+
 
 
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
+
 
     private void GrabObject()
     {
@@ -97,12 +115,14 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Grab working");
             if (!holdingObject)
             {
+                objects.gameObject.GetComponent<Rigidbody>().useGravity = false;
                 objects.transform.parent = gameObject.transform;
                 objects.transform.position = point.transform.position;
                 holdingObject = true;
             }
             else if (holdingObject)
             {
+                objects.gameObject.GetComponent<Rigidbody>().useGravity = true;
                 objects.transform.parent = null;
                 holdingObject = false;
             }

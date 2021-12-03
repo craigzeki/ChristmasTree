@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 5016798907010823884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 5016798908221134723}
   m_Father: {fileID: 5016798906974322879}
@@ -187,6 +187,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3751d509-2e84-4719-b885-1b6318939984
     m_ActionName: Player/Grab[/Keyboard/e,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 48df68fd-3392-44b5-ab6c-334ab2cfd7f7
+    m_ActionName: Player/Interaction[/Keyboard/q,/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player
@@ -225,9 +229,13 @@ MonoBehaviour:
   playerSpeed: 2
   jumpHeight: 1
   gravity: -9.81
+  smoothInputSpeed: 0.2
+  rotationSpeed: 0.05
   point: {fileID: 5016798908221134723}
   range: 1
   holdingObject: 0
+  currentTime: 0
+  triggerGrab: 0
 --- !u!1 &5016798908221134722
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5016798908221134722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.164}
+  m_LocalPosition: {x: 0, y: 0, z: 1.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5016798907010823885}
