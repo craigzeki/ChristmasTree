@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Grab variables")]
 
-    public static bool grabedObject = false;
+    public bool grabedObject = false;
 
     public bool canMove = true;
     

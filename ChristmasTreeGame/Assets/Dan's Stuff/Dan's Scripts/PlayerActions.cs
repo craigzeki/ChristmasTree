@@ -10,11 +10,15 @@ public class PlayerActions : MonoBehaviour
 
     [Range(0, 10f)]
     [SerializeField] private float range = 1f;
-    public bool holdingObject = false;
+
+    private PlayerMovement playerMovement;
+
+    [SerializeField] protected List<GameObject> objectsInHand = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
-        holdingObject = false;
+        playerMovement = this.gameObject.GetComponent<PlayerMovement>();
         //point = GameObject.FindGameObjectWithTag("Point").transform;
         point = this.gameObject.transform.GetChild(0);
     }
@@ -23,7 +27,7 @@ public class PlayerActions : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
-        if (currentTime >= 0.2f && PlayerMovement.grabedObject)
+        if (currentTime >= 0.2f && playerMovement.grabedObject)
         {
             currentTime = 0f;
             GrabObject();
@@ -41,18 +45,24 @@ public class PlayerActions : MonoBehaviour
         foreach (Collider objects in objectsHit)
         {
             Debug.Log("Grab working");
-            if (!holdingObject)
+            if (objectsInHand.Count < 1)
             {
                 objects.gameObject.GetComponent<Rigidbody>().useGravity = false;
                 objects.transform.parent = gameObject.transform;
                 objects.transform.position = point.transform.position;
-                holdingObject = true;
+
+                objectsInHand.Add(objects.gameObject);
+
+
             }
-            else if (holdingObject)
+            else if (objectsInHand.Count > 0)
             {
                 objects.gameObject.GetComponent<Rigidbody>().useGravity = true;
                 objects.transform.parent = null;
-                holdingObject = false;
+
+                objectsInHand.Remove(objects.gameObject);
+
+
             }
         }
 

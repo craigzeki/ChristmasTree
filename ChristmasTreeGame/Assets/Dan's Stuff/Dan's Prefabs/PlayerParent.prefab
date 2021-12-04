@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5016798906974322879}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: PlayerParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 5016798907010823887}
   - component: {fileID: 5016798907010823886}
   - component: {fileID: 4562331809300821427}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -232,6 +232,7 @@ MonoBehaviour:
   gravity: -9.81
   smoothInputSpeed: 0.2
   rotationSpeed: 0.05
+  canMove: 1
 --- !u!114 &4562331809300821427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5016798908221134723}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: GrabPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
