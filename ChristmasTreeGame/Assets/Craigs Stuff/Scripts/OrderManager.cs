@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public enum OrderManagerState : int
 {
@@ -21,12 +22,16 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private Vector3 orderStartPositon = Vector3.zero;
     [SerializeField] private Vector3 orderStartRotation = Vector3.zero;
     [SerializeField] private float orderOOBXPosition = 28.5f;
+    [SerializeField] private int distancePercentageBuffer = 2;
+    [SerializeField] private int minimumDistancePercentage = 30;
+    [SerializeField] private Text scoreText;
 
     private List<ChristmasTreeOrder> christmasTreesOrdered;
     private List<GameObject> ordersOnScreen = new List<GameObject>();
     private OrderManagerState currentState = OrderManagerState.NotStarted;
     private OrderManagerState newState = OrderManagerState.NotStarted;
     private int currentOrder = 0;
+    private int orderPoints = 0;
 
     public OrderManagerState CurrentState { get => currentState; }
     public OrderManagerState NewState
@@ -48,8 +53,9 @@ public class OrderManager : MonoBehaviour
         List<DecorationType> starBauble = new List<DecorationType> { DecorationType.Star, DecorationType.Bauble };
         ChristmasTreeOrder order1 = new ChristmasTreeOrder(justStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Small], ChristmasTreeSize.Small);
         ChristmasTreeOrder order2 = new ChristmasTreeOrder(starBauble, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
+        ChristmasTreeOrder order3 = new ChristmasTreeOrder(justStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Small], ChristmasTreeSize.Small);
 
-        christmasTreesOrdered = new List<ChristmasTreeOrder> { order2, order1 };
+        christmasTreesOrdered = new List<ChristmasTreeOrder> { order1, order2, order3 };
     }
 
     private void OnStart()
@@ -87,19 +93,38 @@ public class OrderManager : MonoBehaviour
                 break;
             case OrderManagerState.Running:
                 
-                if((ordersOnScreen.Count == 0) && (currentOrder < christmasTreesOrdered.Count))
+                //check if orders on the screen are now OOB and need points collecting and destroying
+                
+                //TODO: Need to collect the sleighs destroyed and remove from ordersOnScreen after the loop has exited
+                foreach(GameObject sleigh in ordersOnScreen)
                 {
-                    // instantiate next order
-                    
-                    GameObject sleigh = Instantiate(sleighPrefab, orderStartPositon, Quaternion.Euler(orderStartRotation));
-                    // add the correct tree size
-                    GameObject sleighTree = Instantiate(christmasTreePrefabs[(int)christmasTreesOrdered[currentOrder].ChristmasTreeSize], sleigh.transform);
-                    sleighTree.transform.position = christmasTreeOffset;
-                    sleigh.GetComponent<OrderHandler>().MyOrder = christmasTreesOrdered[currentOrder];
-                    sleigh.GetComponent<OrderHandler>().SetPositions(orderStartPositon.x, orderOOBXPosition);
-                    ordersOnScreen.Add(sleigh);
-                    currentOrder++;
+                    if(
+                        //order has got the end of screen
+                        (christmasTreesOrdered[sleigh.GetComponent<OrderHandler>().MyOrderIndex].OrderDistancePercentage == 100)
+                      )
+                    {
+                        if(
+                            //order has all the decorations placed
+                            (christmasTreesOrdered[sleigh.GetComponent<OrderHandler>().MyOrderIndex].CheckAllDecorationsFulfilled())
+                          )
+                        {
+                            //add points to total
+                            orderPoints += christmasTreesOrdered[sleigh.GetComponent<OrderHandler>().MyOrderIndex].Points;
+                            
+                            //update the gui with the latest score
+                            scoreText.text = "Points: " + orderPoints.ToString();
+                        }
+
+                        //destroy the order on screen
+                        sleigh.GetComponent<OrderHandler>().DestroyOrder();
+                        //remove from screen tracking list
+                        ordersOnScreen.Remove(sleigh);
+                    }
                 }
+
+                // instantiate next order
+                TryCreateOrder();
+                
                 break;
             case OrderManagerState.Paused:
                 break;
@@ -173,6 +198,58 @@ public class OrderManager : MonoBehaviour
                 Debug.LogError("Class OrderManager : HandleOrderManager newState is not valid (newState = )" + newState.ToString());
                 break;
         }
+    }
+
+    private void TryCreateOrder()
+    {
+        if(currentOrder < christmasTreesOrdered.Count)
+        {
+            if (ordersOnScreen.Count == 0)
+            {
+                // instantiate first order
+
+                CreateOrder();
+            }
+            else if(currentOrder > 0)
+            {
+                if(
+                    (
+                        //order on screen already is faster than the one we want to create
+                        christmasTreesOrdered[currentOrder-1].Speed >= christmasTreesOrdered[currentOrder].Speed
+                    )
+                    &&
+                    (
+                        //order on screen has already travelled a minimum distance
+                        christmasTreesOrdered[currentOrder - 1].OrderDistancePercentage >= minimumDistancePercentage
+                    )
+                  )
+                {
+                    CreateOrder();
+                }
+                else if(
+                        //order on screen is slower than the one we want to create
+                        //order on screen has travelled far enough such that the new order will not catch up
+                        (christmasTreesOrdered[currentOrder - 1].OrderDistancePercentage - distancePercentageBuffer)
+                        > ((christmasTreesOrdered[currentOrder - 1].Speed / christmasTreesOrdered[currentOrder].Speed) * 100)
+                        )
+                {
+                    CreateOrder();
+                }
+            }
+        }
+
+    }
+
+    private void CreateOrder()
+    {
+        GameObject sleigh = Instantiate(sleighPrefab, orderStartPositon, Quaternion.Euler(orderStartRotation));
+        // add the correct tree size
+        GameObject sleighTree = Instantiate(christmasTreePrefabs[(int)christmasTreesOrdered[currentOrder].ChristmasTreeSize], sleigh.transform);
+        sleighTree.transform.position = christmasTreeOffset;
+        sleigh.GetComponent<OrderHandler>().MyOrder = christmasTreesOrdered[currentOrder];
+        sleigh.GetComponent<OrderHandler>().SetOrderData(currentOrder, orderStartPositon.x, orderOOBXPosition);
+        ordersOnScreen.Add(sleigh);
+        currentOrder++;
     }
 
     public void StartPressed()

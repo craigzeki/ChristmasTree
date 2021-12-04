@@ -5,17 +5,20 @@ using UnityEngine;
 public class OrderHandler : MonoBehaviour
 {
     private ChristmasTreeOrder myOrder;
-    private int myOOBXPosition;
-    private int myStartXPosition;
+    private float myOOBXPosition;
+    private float myStartXPosition;
     public bool paused = false;
-    private int distanceToTravel = default;
+    private float distanceToTravel = default;
     private int distanceTravelledPercent = 0;
     private CloudHandler myCloud;
+    private int myOrderIndex;
 
     public ChristmasTreeOrder MyOrder { set => myOrder = value; }
-   
-    public void SetPositions(float startXPosition, float oobXPosition)
+    public int MyOrderIndex { get => myOrderIndex; }
+
+    public void SetOrderData(int orderIndex, float startXPosition, float oobXPosition)
     {
+        myOrderIndex = orderIndex;
         myStartXPosition = Mathf.RoundToInt(startXPosition);
         myOOBXPosition = Mathf.RoundToInt(oobXPosition);
         distanceToTravel = myOOBXPosition - myStartXPosition;
@@ -41,16 +44,25 @@ public class OrderHandler : MonoBehaviour
         {
             if (transform.position.x >= myOOBXPosition)
             {
-                
+                myOrder.OrderDistancePercentage = 100;
             }
             else
             {
                 transform.position += new Vector3(myOrder.Speed, 0, 0);
+                float distanceTravelled = transform.position.x - myStartXPosition;
+                distanceTravelledPercent = Mathf.RoundToInt((distanceTravelled / distanceToTravel) * 100.0f);
+                myOrder.OrderDistancePercentage = distanceTravelledPercent;
+                Debug.Log("Distance Travelled %: " + myOrder.OrderDistancePercentage.ToString());
             }
         }
     }
 
-    private bool tryPlaceDecoration(Decoration decoration)
+    public void DestroyOrder()
+    {
+        Destroy(this.gameObject);
+    }
+
+    private bool TryPlaceDecoration(Decoration decoration)
     {
         bool result = false;
 
@@ -80,7 +92,7 @@ public class OrderHandler : MonoBehaviour
             
             if (theDecoration != null)
             {
-                if(tryPlaceDecoration(theDecoration.GetDecoration()))
+                if(TryPlaceDecoration(theDecoration.GetDecoration()))
                 {
                     // decoration placed
                     // play placed sound

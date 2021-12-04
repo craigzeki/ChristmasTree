@@ -29,11 +29,13 @@ public class ChristmasTreeOrder
     private int points;
     private List<DecorationType> decorationsRequired;
     private ChristmasTreeProgressState progress;
+    private int orderDistancePercentage = 0; //holds the percentage of distance travelled between the spawn point and OOB.
     public int Points { get => points; }
     public List<DecorationType> DecorationsRequired { get => decorationsRequired; }
     public ChristmasTreeProgressState Progress { get => progress; }
     public ChristmasTreeSize ChristmasTreeSize { get => christmasTreeSize; }
     public float Speed { get => speed; }
+    public int OrderDistancePercentage { get => orderDistancePercentage; set => orderDistancePercentage = value; }
 
     public ChristmasTreeOrder(List<DecorationType> decorationsRequired, float speed, ChristmasTreeSize christmasTreeSize )
     {
