@@ -27,8 +27,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Grab variables")]
 
     public static bool grabedObject = false;
-    
-    
+
+    public bool canMove = true;
     
 
 
@@ -68,7 +68,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        if (canMove)
+        {
+            controller.Move(move * Time.deltaTime * playerSpeed);
+        }
+        
 
         if(move.sqrMagnitude > 0.1f)
         {
