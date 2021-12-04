@@ -16,6 +16,7 @@ public class OrderManager : MonoBehaviour
 {
     [SerializeField] private GameObject sleighPrefab;
     [SerializeField] private GameObject[] christmasTreePrefabs = new GameObject[(int)ChristmasTreeSize.NumOfSizes];
+    [SerializeField] private float[] christmasTreeSpeeds = new float[(int)ChristmasTreeSize.NumOfSizes];
     [SerializeField] private Vector3 christmasTreeOffset = new Vector3(-1.75f, 0.5f, 0.0f);
     [SerializeField] private Vector3 orderStartPositon = Vector3.zero;
     [SerializeField] private Vector3 orderStartRotation = Vector3.zero;
@@ -45,8 +46,8 @@ public class OrderManager : MonoBehaviour
 
         List<DecorationType> justStar = new List<DecorationType> { DecorationType.Star };
         List<DecorationType> starBauble = new List<DecorationType> { DecorationType.Star, DecorationType.Bauble };
-        ChristmasTreeOrder order1 = new ChristmasTreeOrder(justStar, 0.01f, ChristmasTreeSize.Small);
-        ChristmasTreeOrder order2 = new ChristmasTreeOrder(starBauble, 0.01f, ChristmasTreeSize.Large);
+        ChristmasTreeOrder order1 = new ChristmasTreeOrder(justStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Small], ChristmasTreeSize.Small);
+        ChristmasTreeOrder order2 = new ChristmasTreeOrder(starBauble, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
 
         christmasTreesOrdered = new List<ChristmasTreeOrder> { order2, order1 };
     }

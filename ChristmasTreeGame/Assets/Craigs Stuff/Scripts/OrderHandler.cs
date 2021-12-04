@@ -9,6 +9,7 @@ public class OrderHandler : MonoBehaviour
     private int myStartXPosition;
     public bool paused = false;
     private int distanceToTravel = default;
+    private int distanceTravelledPercent = 0;
     private CloudHandler myCloud;
 
     public ChristmasTreeOrder MyOrder { set => myOrder = value; }

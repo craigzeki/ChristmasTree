@@ -2448,6 +2448,9 @@ MonoBehaviour:
   christmasTreePrefabs:
   - {fileID: 5497849657524840347, guid: 1feafdb372b586a418dd1b34502cd631, type: 3}
   - {fileID: 8283266551739794927, guid: a0b5717137e49ec4f9d923c457c08b26, type: 3}
+  christmasTreeSpeeds:
+  - 0.02
+  - 0.01
   christmasTreeOffset: {x: -1.75, y: 0.5, z: 0}
   orderStartPositon: {x: 0, y: 0, z: 0}
   orderStartRotation: {x: 0, y: 0, z: 0}
