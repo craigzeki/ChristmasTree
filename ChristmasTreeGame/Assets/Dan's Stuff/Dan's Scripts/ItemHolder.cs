@@ -14,7 +14,7 @@ public class ItemHolder : PlayerActions
     public ItemStats itemStats;
     [SerializeField] private float radius = 1f;
 
-    private float itemSpawnTime = 1f;
+    [SerializeField] private float itemSpawnTime = 1f;
     private bool canSpawnItem = true;
 
     private PlayerMovement playerMovement1;
@@ -30,20 +30,14 @@ public class ItemHolder : PlayerActions
     // Update is called once per frame
     void Update()
     {
-        //itemSpawnTime -= Time.deltaTime;
+        itemSpawnTime -= Time.deltaTime;
         if(itemSpawnTime <= 0f)
         {
             itemSpawnTime = 0f;
             canSpawnItem = true;
         }
 
-        /*
-        if (CheckPlayerInRange() && PlayerMovement.grabedObject && objectsInHand.Count < 1)
-        {
-            PickUpItem();
-            itemSpawnTime = 1f;
-        }
-        */
+        
         CheckPlayerInRange();
         
     }
@@ -52,6 +46,11 @@ public class ItemHolder : PlayerActions
     {
 
         Collider[] allPlayersInRange = Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Player"));
+
+        if(allPlayersInRange.Length == 0)
+        {
+            DestroyObjects();
+        }
 
         foreach (Collider player in allPlayersInRange)
         {
@@ -70,39 +69,31 @@ public class ItemHolder : PlayerActions
 
     private void CanSpawnItem()
     {
-        Collider[] objectsInRange = Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Objects"));
-
         
+        if(!holdingObject && canSpawnItem)
+        {
+            SpawnItem();
+        }
+        
+
     }
 
     private void SpawnItem()
     {
         Instantiate(itemStats.itemPrefab, transform.position, Quaternion.identity);
-    }
-
-    private void PickUpItem()
-    {
-        Debug.Log(itemStats.itemPrefab.ToString());
-        if (hasSpawnedItem())
-        {
-            Debug.Log("Spawning item");
-            Instantiate(itemStats.itemPrefab, transform.position, Quaternion.identity);
-            canSpawnItem = false;
-        }
-        
+        canSpawnItem = false;
+        itemSpawnTime = 1f;
     }
 
     
-
-    private bool hasSpawnedItem()
+    private void DestroyObjects()
     {
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Objects"));
 
-        if(objectsInRange.Length <= 1)
+        foreach(Collider objects in objectsInRange)
         {
-            return true;
+            Destroy(objects.gameObject, 3f);
         }
-        return false;
     }
 
     /*

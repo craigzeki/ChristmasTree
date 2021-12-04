@@ -13,8 +13,9 @@ public class PlayerActions : MonoBehaviour
 
     private PlayerMovement playerMovement;
 
-    [SerializeField] protected List<GameObject> objectsInHand = new List<GameObject>();
+    [SerializeField] private List<GameObject> objectsInHand = new List<GameObject>();
 
+    [SerializeField] protected bool holdingObject = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +27,21 @@ public class PlayerActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         currentTime += Time.deltaTime;
         if (currentTime >= 0.2f && playerMovement.grabedObject)
         {
             currentTime = 0f;
             GrabObject();
+        }
+
+        if(objectsInHand.Count > 0)
+        {
+            holdingObject = true;
+        }
+        else
+        {
+            holdingObject = false;
         }
 
 
@@ -70,6 +81,6 @@ public class PlayerActions : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawWireSphere(point.position, range);
+        Gizmos.DrawWireSphere(point.position, range);
     }
 }

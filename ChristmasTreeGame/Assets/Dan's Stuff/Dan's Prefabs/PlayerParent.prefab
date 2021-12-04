@@ -232,6 +232,7 @@ MonoBehaviour:
   gravity: -9.81
   smoothInputSpeed: 0.2
   rotationSpeed: 0.05
+  grabedObject: 0
   canMove: 1
 --- !u!114 &4562331809300821427
 MonoBehaviour:
@@ -246,7 +247,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTime: 0
-  range: 1
+  range: 0.47
+  objectsInHand: []
   holdingObject: 0
 --- !u!1 &5016798908221134722
 GameObject:
