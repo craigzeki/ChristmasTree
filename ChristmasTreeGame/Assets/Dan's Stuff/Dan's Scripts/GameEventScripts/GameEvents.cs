@@ -45,7 +45,7 @@ public class GameEvents : MonoBehaviour
 
     public void StationHolderTriggerExit(int id)
     {
-        if(onStationHolderTriggerExit != null)
+        if (onStationHolderTriggerExit != null)
         {
             onStationHolderTriggerExit(id);
         }

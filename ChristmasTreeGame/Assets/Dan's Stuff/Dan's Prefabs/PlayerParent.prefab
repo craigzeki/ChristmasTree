@@ -189,7 +189,19 @@ MonoBehaviour:
     m_ActionId: 3751d509-2e84-4719-b885-1b6318939984
     m_ActionName: Player/Grab[/Keyboard/e,/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5016798907010823886}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 48df68fd-3392-44b5-ab6c-334ab2cfd7f7
     m_ActionName: Player/Interaction[/Keyboard/q,/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
@@ -234,6 +246,7 @@ MonoBehaviour:
   rotationSpeed: 0.05
   grabedObject: 0
   canMove: 1
+  interactPressed: 0
 --- !u!114 &4562331809300821427
 MonoBehaviour:
   m_ObjectHideFlags: 0

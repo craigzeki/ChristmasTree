@@ -5,15 +5,19 @@ using UnityEngine;
 public class StationTriggerArea : MonoBehaviour
 {
     public int id;
+
+    private Collider tempCollider;
+
+
     public void OnTriggerEnter(Collider other)
     {
-       
-        if(other.gameObject.GetComponent<ItemDecoration>().name == "Bauble" && !other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
+        if (other.gameObject.GetComponent<ItemDecoration>().name == "Bauble" && !other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
         {
-            other.gameObject.transform.position = transform.GetChild(0).position;
-            other.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            
-            other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+
+            tempCollider = other;
+
+
 
             //Call the event from game events 
             GameEvents.current.StationHolderTriggerEnter(id);
@@ -22,12 +26,14 @@ public class StationTriggerArea : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<ItemDecoration>().name == "Bauble" && other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
+        
+        
+        if (other.gameObject.GetComponent<ItemDecoration>().name == "Bauble" && other.gameObject.GetComponent<ItemDecoration>().isBeingHeld && other == tempCollider)
         {
 
             GameEvents.current.StationHolderTriggerExit(id);
         }
-
+        
 
             
     }

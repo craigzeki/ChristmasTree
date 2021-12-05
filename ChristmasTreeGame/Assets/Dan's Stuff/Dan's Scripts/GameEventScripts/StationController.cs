@@ -9,13 +9,14 @@ public class StationController : MonoBehaviour
     void Start()
     {
         GameEvents.current.onStationHolderTriggerEnter += OnInteractItem;
-        GameEvents.current.onItemHolderTriggerExit += OnExitItem;
+        GameEvents.current.onStationHolderTriggerExit += OnExitItem;
     }
 
     private void OnInteractItem(int id)
     {
         if(id == this.id)
         {
+            
             Debug.Log("Station working");
         }
     }
