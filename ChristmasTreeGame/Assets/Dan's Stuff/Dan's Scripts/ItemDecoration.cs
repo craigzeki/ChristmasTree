@@ -11,6 +11,8 @@ public class ItemDecoration : MonoBehaviour
 
     //If a player is holding this item set a bool variable so others can't pick it up
 
+    public string name;
+
     public bool isBeingHeld = false;
 
     [SerializeField] private List<GameObject> collidingObjects = new List<GameObject>();
@@ -39,24 +41,4 @@ public class ItemDecoration : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (collidingObjects.Contains(other.gameObject))
-        {
-            collidingObjects.Add(other.gameObject);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (collidingObjects.Contains(other.gameObject))
-        {
-            collidingObjects.Remove(other.gameObject);
-        }
-    }
-
-    private bool IsPostionValid()
-    {
-        return collidingObjects.Count == 0;
-    }
 }

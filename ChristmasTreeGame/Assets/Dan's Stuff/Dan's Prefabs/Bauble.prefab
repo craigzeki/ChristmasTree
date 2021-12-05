@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b9d61e94caa8e4799cc5798016bf7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Bauble
   isBeingHeld: 0
   collidingObjects: []
 --- !u!1 &3886537619896844751

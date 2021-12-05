@@ -31,4 +31,24 @@ public class GameEvents : MonoBehaviour
         }
     }
 
+    public event Action<int> onStationHolderTriggerEnter;
+
+    public void StationHolderTriggerEnter(int id)
+    {
+        if(onStationHolderTriggerEnter != null)
+        {
+            onStationHolderTriggerEnter(id);
+        }
+    }
+
+    public event Action<int> onStationHolderTriggerExit;
+
+    public void StationHolderTriggerExit(int id)
+    {
+        if(onStationHolderTriggerExit != null)
+        {
+            onStationHolderTriggerExit(id);
+        }
+    }
+
 }
