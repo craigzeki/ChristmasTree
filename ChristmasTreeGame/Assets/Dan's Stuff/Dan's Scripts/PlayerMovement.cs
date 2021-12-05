@@ -29,8 +29,8 @@ public class PlayerMovement : MonoBehaviour
     public bool grabedObject = false;
 
     public bool canMove = true;
-    
 
+    public bool interactPressed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +57,11 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        interactPressed = context.action.triggered;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -72,7 +77,10 @@ public class PlayerMovement : MonoBehaviour
         {
             controller.Move(move * Time.deltaTime * playerSpeed);
         }
-        
+        else if (!canMove)
+        {
+            StartCoroutine(ResumeMove());
+        }
 
         if(move.sqrMagnitude > 0.1f)
         {
@@ -94,7 +102,12 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    private IEnumerator ResumeMove()
+    {
+        yield return new WaitForSeconds(1f);
 
+        canMove = true;
+    }
     
 
     

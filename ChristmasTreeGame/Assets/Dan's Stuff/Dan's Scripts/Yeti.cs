@@ -9,7 +9,7 @@ public class Yeti : MonoBehaviour
 
     [SerializeField] private Transform firePoint;
 
-    private float countdown = 1f;
+    private float countdown = 3f;
 
     private bool playerInScene = false;
 
@@ -51,7 +51,7 @@ public class Yeti : MonoBehaviour
             Debug.Log("Firing");
             
             AttackPlayer();
-            countdown = 1f;
+            countdown = 3f;
         }
 
 

@@ -14,6 +14,8 @@ public class ItemHolder : PlayerActions
     public ItemStats itemStats;
     [SerializeField] private float radius = 1f;
 
+    [SerializeField] private Transform spawnPoint;
+
     [SerializeField] private float itemSpawnTime = 1f;
     private bool canSpawnItem = true;
 
@@ -25,6 +27,9 @@ public class ItemHolder : PlayerActions
     void Start()
     {
         //Instantiate(itemStats.itemPrefab, transform.position, Quaternion.identity);
+
+        //Get the spawnpoint for this specific holder 
+        spawnPoint = this.gameObject.transform.GetChild(1);
     }
 
     // Update is called once per frame
@@ -59,7 +64,7 @@ public class ItemHolder : PlayerActions
 
             if (tempPlayerMovement.grabedObject)
             {
-                Debug.Log("Player pressed grab");
+                
                 CanSpawnItem();
             }
             
@@ -80,7 +85,7 @@ public class ItemHolder : PlayerActions
 
     private void SpawnItem()
     {
-        Instantiate(itemStats.itemPrefab, transform.position, Quaternion.identity);
+        Instantiate(itemStats.itemPrefab, spawnPoint.position, Quaternion.identity);
         canSpawnItem = false;
         itemSpawnTime = 1f;
     }
@@ -96,16 +101,7 @@ public class ItemHolder : PlayerActions
         }
     }
 
-    /*
-    public override void GrabObject()
-    {
-        if(PlayerMovement.grabedObject && !holdingObject)
-        {
-            Instantiate(itemStats.itemPrefab, point.position, Quaternion.identity);
-        }
-        base.GrabObject();
-    }
-    */
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, radius);

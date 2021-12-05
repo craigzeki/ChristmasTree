@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 5016798907010823884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.7, y: 1.5, z: 0.7}
   m_Children:
   - {fileID: 5016798908221134723}
   m_Father: {fileID: 5016798906974322879}
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTime: 0
-  range: 0.47
+  range: 0.75
   objectsInHand: []
   holdingObject: 0
 --- !u!1 &5016798908221134722
@@ -259,7 +259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5016798908221134723}
-  m_Layer: 21
+  m_Layer: 0
   m_Name: GrabPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,6 +13,8 @@ public class ItemDecoration : MonoBehaviour
 
     public bool isBeingHeld = false;
 
+    [SerializeField] private List<GameObject> collidingObjects = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +24,39 @@ public class ItemDecoration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+        
+
         if(transform.parent != null && transform.parent.parent != null)
         {
-            Debug.Log("Being held by player");
+            
             isBeingHeld = true;
         }
         else
         {
             isBeingHeld = false;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (collidingObjects.Contains(other.gameObject))
+        {
+            collidingObjects.Add(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (collidingObjects.Contains(other.gameObject))
+        {
+            collidingObjects.Remove(other.gameObject);
+        }
+    }
+
+    private bool IsPostionValid()
+    {
+        return collidingObjects.Count == 0;
     }
 }

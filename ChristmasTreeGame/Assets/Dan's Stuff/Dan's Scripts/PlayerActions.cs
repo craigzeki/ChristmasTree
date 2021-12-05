@@ -55,10 +55,22 @@ public class PlayerActions : MonoBehaviour
 
         foreach (Collider objects in objectsHit)
         {
-            Debug.Log("Grab working");
-            if (objectsInHand.Count < 1)
+            
+            ItemDecoration item = objects.gameObject.GetComponent<ItemDecoration>();
+
+            Transform currentObjectScale = objects.gameObject.transform;
+
+            if (this.transform.childCount < 2 && !item.isBeingHeld)
             {
-                objects.gameObject.GetComponent<Rigidbody>().useGravity = false;
+
+                objects.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+                objects.transform.localScale = currentObjectScale.localScale;
+                objects.transform.localRotation = currentObjectScale.rotation;
+
+                //objects.transform.localScale = new Vector3(1, 1, 1);
+                //objects.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
                 objects.transform.parent = gameObject.transform;
                 objects.transform.position = point.transform.position;
 
@@ -66,9 +78,10 @@ public class PlayerActions : MonoBehaviour
 
 
             }
-            else if (objectsInHand.Count > 0)
+            else if (this.transform.childCount >= 2)
             {
-                objects.gameObject.GetComponent<Rigidbody>().useGravity = true;
+
+                objects.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 objects.transform.parent = null;
 
                 objectsInHand.Remove(objects.gameObject);
@@ -78,6 +91,8 @@ public class PlayerActions : MonoBehaviour
         }
 
     }
+
+
 
     private void OnDrawGizmos()
     {
