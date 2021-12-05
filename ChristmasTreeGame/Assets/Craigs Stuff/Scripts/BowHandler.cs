@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StarHandler : MonoBehaviour, iDecoration
+public class BowHandler : MonoBehaviour, iDecoration
 {
     [SerializeField] private int points = 10;
     [SerializeField] private int multiplier = 1;
-    private StarDecoration myDeco;
+    private BowDecoration myDeco;
 
     public void DestroyDecoration()
     {
@@ -27,7 +27,7 @@ public class StarHandler : MonoBehaviour, iDecoration
 
     private void Awake()
     {
-        myDeco = new StarDecoration(points, multiplier);
+        myDeco = new BowDecoration(points, multiplier);
     }
 
     // Start is called before the first frame update

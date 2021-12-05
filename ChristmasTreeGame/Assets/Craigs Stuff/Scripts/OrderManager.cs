@@ -32,6 +32,7 @@ public class OrderManager : MonoBehaviour
     private OrderManagerState newState = OrderManagerState.NotStarted;
     private int currentOrder = 0;
     private int orderPoints = 0;
+    private List<GameObject> ordersToDestroy = new List<GameObject>();
 
     public OrderManagerState CurrentState { get => currentState; }
     public OrderManagerState NewState
@@ -51,11 +52,14 @@ public class OrderManager : MonoBehaviour
 
         List<DecorationType> justStar = new List<DecorationType> { DecorationType.Star };
         List<DecorationType> starBauble = new List<DecorationType> { DecorationType.Star, DecorationType.Bauble };
+        List<DecorationType> BowBaubleBaubleStar = new List<DecorationType> { DecorationType.Bow, DecorationType.Bauble, DecorationType.Bauble, DecorationType.Star };
+        
         ChristmasTreeOrder order1 = new ChristmasTreeOrder(justStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Small], ChristmasTreeSize.Small);
         ChristmasTreeOrder order2 = new ChristmasTreeOrder(starBauble, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
         ChristmasTreeOrder order3 = new ChristmasTreeOrder(justStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Small], ChristmasTreeSize.Small);
+        ChristmasTreeOrder order4 = new ChristmasTreeOrder(BowBaubleBaubleStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
 
-        christmasTreesOrdered = new List<ChristmasTreeOrder> { order1, order2, order3 };
+        christmasTreesOrdered = new List<ChristmasTreeOrder> { order1, order2, order3, order4 };
     }
 
     private void OnStart()
@@ -92,34 +96,42 @@ public class OrderManager : MonoBehaviour
                 
                 break;
             case OrderManagerState.Running:
-                
+
                 //check if orders on the screen are now OOB and need points collecting and destroying
-                
+                ordersToDestroy.Clear();
                 //TODO: Need to collect the sleighs destroyed and remove from ordersOnScreen after the loop has exited
                 foreach(GameObject sleigh in ordersOnScreen)
                 {
-                    if(
+                    if (
                         //order has got the end of screen
                         (christmasTreesOrdered[sleigh.GetComponent<OrderHandler>().MyOrderIndex].OrderDistancePercentage == 100)
                       )
                     {
-                        if(
+                        if (
                             //order has all the decorations placed
                             (christmasTreesOrdered[sleigh.GetComponent<OrderHandler>().MyOrderIndex].CheckAllDecorationsFulfilled())
                           )
                         {
                             //add points to total
                             orderPoints += christmasTreesOrdered[sleigh.GetComponent<OrderHandler>().MyOrderIndex].Points;
-                            
+
                             //update the gui with the latest score
                             scoreText.text = "Points: " + orderPoints.ToString();
                         }
+                        //add to a list so that they can be destroyed after the for loop has completed
+                        //otherwise we will be modifying the list and indexing will be messed up
+                        ordersToDestroy.Add(sleigh);
 
-                        //destroy the order on screen
-                        sleigh.GetComponent<OrderHandler>().DestroyOrder();
-                        //remove from screen tracking list
-                        ordersOnScreen.Remove(sleigh);
                     }
+                }
+
+                //go through orders to destroy and remove
+                foreach (GameObject sleigh in ordersToDestroy)
+                {
+                    //destroy the order on screen
+                    sleigh.GetComponent<OrderHandler>().DestroyOrder();
+                    //remove from screen tracking list
+                    ordersOnScreen.Remove(sleigh);
                 }
 
                 // instantiate next order
