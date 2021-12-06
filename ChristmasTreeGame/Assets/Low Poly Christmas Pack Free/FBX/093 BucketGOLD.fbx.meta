@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 023bec0a17bc445bb90f2e6f23177347
+guid: 13a449a9e02232d49a2ba0ec20cfb5ac
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -124,7 +124,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Lowpoly_Christmas_Pack_093_phong2
-    second: {fileID: 2100000, guid: aa82b3f4c724d5a48bb1807c79b1ee46, type: 2}
+    second: {fileID: 2100000, guid: 9d1007ae5b13cfa489fa154c51c6c13a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

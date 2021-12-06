@@ -9,6 +9,10 @@ public enum DecorationType : int
     Bauble,
     Gift,
     RawBauble,
+    Gold,
+    Pot,
+    PotOGold,
+    PotOMoltenGold,
     //New decorations here
     NumOfDecorations
 }

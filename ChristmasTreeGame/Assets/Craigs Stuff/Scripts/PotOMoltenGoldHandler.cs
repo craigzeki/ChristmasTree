@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaubleHandler : MonoBehaviour, iDecoration
+public class PotOMoltenGoldHandler : MonoBehaviour, iDecoration
 {
     [SerializeField] private int points = 10;
     [SerializeField] private int multiplier = 1;
-    private BaubleDecoration myDeco;
+    private PotOMoltenGoldDecoration myDeco;
 
 
 
@@ -39,7 +39,7 @@ public class BaubleHandler : MonoBehaviour, iDecoration
 
     private void Awake()
     {
-        myDeco = new BaubleDecoration(points, multiplier);
+        myDeco = new PotOMoltenGoldDecoration(points, multiplier);
     }
 
     // Start is called before the first frame update

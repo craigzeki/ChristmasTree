@@ -25,7 +25,15 @@ public class StarHandler : MonoBehaviour, iDecoration
         }
     }
 
-    
+    public bool GetUpgradeComplete()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SetUpgrading(bool state)
+    {
+        throw new System.NotImplementedException();
+    }
 
     private void Awake()
     {

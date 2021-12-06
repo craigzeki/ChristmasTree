@@ -57,4 +57,14 @@ public class RawBaubleHandler : MonoBehaviour, iDecoration
             }
         }
     }
+
+    public void SetUpgrading(bool state)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public bool GetUpgradeComplete()
+    {
+        throw new System.NotImplementedException();
+    }
 }
