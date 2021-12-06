@@ -11,28 +11,35 @@ public class StationTriggerArea : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<ItemDecoration>().name == "Bauble" && !other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
+        if(other.gameObject.tag == "Decoration")
         {
+            if (other.gameObject.GetComponent<ItemDecoration>().name == "Bauble" && !other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
+            {
 
 
-            tempCollider = other;
+                tempCollider = other;
 
 
 
-            //Call the event from game events 
-            GameEvents.current.StationHolderTriggerEnter(id);
+                //Call the event from game events 
+                GameEvents.current.StationHolderTriggerEnter(id);
+            }
         }
+        
     }
 
     public void OnTriggerExit(Collider other)
     {
         
-        
-        if (other.gameObject.GetComponent<ItemDecoration>().name == "Bauble" && other.gameObject.GetComponent<ItemDecoration>().isBeingHeld && other == tempCollider)
+        if(other.gameObject.tag == "Decoration")
         {
+            if (other.gameObject.GetComponent<ItemDecoration>().name == "Bauble" && other.gameObject.GetComponent<ItemDecoration>().isBeingHeld && other == tempCollider)
+            {
 
-            GameEvents.current.StationHolderTriggerExit(id);
+                GameEvents.current.StationHolderTriggerExit(id);
+            }
         }
+        
         
 
             

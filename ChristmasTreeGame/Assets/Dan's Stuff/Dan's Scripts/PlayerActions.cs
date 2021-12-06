@@ -96,6 +96,6 @@ public class PlayerActions : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(point.position, range);
+        //Gizmos.DrawWireSphere(point.position, range);
     }
 }
