@@ -8,6 +8,7 @@ public enum DecorationType : int
     Bow,
     Bauble,
     Gift,
+    RawBauble,
     //New decorations here
     NumOfDecorations
 }

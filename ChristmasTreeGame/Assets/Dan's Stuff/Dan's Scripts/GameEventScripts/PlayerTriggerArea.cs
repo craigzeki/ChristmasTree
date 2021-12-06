@@ -5,12 +5,16 @@ using UnityEngine;
 public class PlayerTriggerArea : MonoBehaviour
 {
     public int id;
-    private bool interact = false;
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            interact = true;
+            bool isInteracting = other.gameObject.GetComponent<PlayerMovement>().interactPressed;
+            if (isInteracting)
+            {
+                Debug.Log("Player interacting with station");
+            }
             //GameEvents.current.StationHolderTriggerEnter(id);
         }
     }

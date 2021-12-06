@@ -8,21 +8,18 @@ public class StationTriggerArea : MonoBehaviour
 
     private Collider tempCollider;
 
-
+    public bool objectOnStation = false;
     public void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Decoration")
         {
-            if (other.gameObject.GetComponent<ItemDecoration>().name == "Bauble" && !other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
+            if (other.gameObject.GetComponent<iDecoration>().GetDecoration().MyDecorationType == DecorationType.RawBauble && !other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
             {
-
-
-                tempCollider = other;
-
-
-
+                objectOnStation = true;
+                other.gameObject.GetComponent<RawBaubleHandler>().upgrading = true; ;
+                
                 //Call the event from game events 
-                GameEvents.current.StationHolderTriggerEnter(id);
+                //GameEvents.current.StationHolderTriggerEnter(id);
             }
         }
         
@@ -33,10 +30,11 @@ public class StationTriggerArea : MonoBehaviour
         
         if(other.gameObject.tag == "Decoration")
         {
-            if (other.gameObject.GetComponent<ItemDecoration>().name == "Bauble" && other.gameObject.GetComponent<ItemDecoration>().isBeingHeld && other == tempCollider)
+            if (other.gameObject.GetComponent<iDecoration>().GetDecoration().MyDecorationType == DecorationType.RawBauble && other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
             {
-
-                GameEvents.current.StationHolderTriggerExit(id);
+                objectOnStation = false;
+                other.gameObject.GetComponent<RawBaubleHandler>().upgrading = false;
+                //GameEvents.current.StationHolderTriggerExit(id);
             }
         }
         
