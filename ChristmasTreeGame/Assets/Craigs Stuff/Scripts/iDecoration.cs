@@ -6,4 +6,6 @@ public interface iDecoration
 {
     Decoration GetDecoration();
     void DestroyDecoration();
+
+
 }

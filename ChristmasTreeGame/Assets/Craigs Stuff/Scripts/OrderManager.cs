@@ -18,7 +18,6 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private GameObject sleighPrefab;
     [SerializeField] private GameObject[] christmasTreePrefabs = new GameObject[(int)ChristmasTreeSize.NumOfSizes];
     [SerializeField] private float[] christmasTreeSpeeds = new float[(int)ChristmasTreeSize.NumOfSizes];
-    [SerializeField] private Vector3 christmasTreeOffset = new Vector3(-1.75f, 0.5f, 0.0f);
     [SerializeField] private Vector3 orderStartPositon = Vector3.zero;
     [SerializeField] private Vector3 orderStartRotation = Vector3.zero;
     [SerializeField] private float orderOOBXPosition = 28.5f;
@@ -51,15 +50,17 @@ public class OrderManager : MonoBehaviour
         newState = OrderManagerState.NotStarted;
 
         List<DecorationType> justStar = new List<DecorationType> { DecorationType.Star };
+        List<DecorationType> justGift = new List<DecorationType> { DecorationType.Gift };
         List<DecorationType> starBauble = new List<DecorationType> { DecorationType.Star, DecorationType.Bauble };
         List<DecorationType> BowBaubleBaubleStar = new List<DecorationType> { DecorationType.Bow, DecorationType.Bauble, DecorationType.Bauble, DecorationType.Star };
         
         ChristmasTreeOrder order1 = new ChristmasTreeOrder(justStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Small], ChristmasTreeSize.Small);
         ChristmasTreeOrder order2 = new ChristmasTreeOrder(starBauble, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
+        ChristmasTreeOrder order5 = new ChristmasTreeOrder(justGift, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
         ChristmasTreeOrder order3 = new ChristmasTreeOrder(justStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Small], ChristmasTreeSize.Small);
         ChristmasTreeOrder order4 = new ChristmasTreeOrder(BowBaubleBaubleStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
 
-        christmasTreesOrdered = new List<ChristmasTreeOrder> { order1, order2, order3, order4 };
+        christmasTreesOrdered = new List<ChristmasTreeOrder> { order5, order1, order2, order3, order4 };
     }
 
     private void OnStart()
@@ -224,15 +225,19 @@ public class OrderManager : MonoBehaviour
             }
             else if(currentOrder > 0)
             {
-                if(
+                if (
                     (
                         //order on screen already is faster than the one we want to create
-                        christmasTreesOrdered[currentOrder-1].Speed >= christmasTreesOrdered[currentOrder].Speed
+                        //below line is better than original as it accounts for the case where the last order was completed before the first
+                        ordersOnScreen[ordersOnScreen.Count - 1].GetComponent<OrderHandler>().MyOrder.Speed >= christmasTreesOrdered[currentOrder].Speed
+                        //christmasTreesOrdered[currentOrder-1].Speed >= christmasTreesOrdered[currentOrder].Speed
                     )
                     &&
                     (
                         //order on screen has already travelled a minimum distance
-                        christmasTreesOrdered[currentOrder - 1].OrderDistancePercentage >= minimumDistancePercentage
+                        //below line is better than original as it accounts for the case where the last order was completed before the first
+                        ordersOnScreen[ordersOnScreen.Count - 1].GetComponent<OrderHandler>().MyOrder.OrderDistancePercentage >= minimumDistancePercentage
+                        //christmasTreesOrdered[currentOrder - 1].OrderDistancePercentage >= minimumDistancePercentage
                     )
                   )
                 {
@@ -241,9 +246,13 @@ public class OrderManager : MonoBehaviour
                 else if(
                         //order on screen is slower than the one we want to create
                         //order on screen has travelled far enough such that the new order will not catch up
-                        (christmasTreesOrdered[currentOrder - 1].OrderDistancePercentage - distancePercentageBuffer)
-                        > ((christmasTreesOrdered[currentOrder - 1].Speed / christmasTreesOrdered[currentOrder].Speed) * 100)
+                        //below line is better than original as it accounts for the case where the last order was completed before the first
+                        (ordersOnScreen[ordersOnScreen.Count - 1].GetComponent<OrderHandler>().MyOrder.OrderDistancePercentage - distancePercentageBuffer)
+                        > ((ordersOnScreen[ordersOnScreen.Count - 1].GetComponent<OrderHandler>().MyOrder.Speed / christmasTreesOrdered[currentOrder].Speed) * 100)
                         )
+                        //(christmasTreesOrdered[currentOrder - 1].OrderDistancePercentage - distancePercentageBuffer)
+                        //> ((christmasTreesOrdered[currentOrder - 1].Speed / christmasTreesOrdered[currentOrder].Speed) * 100)
+                        //)
                 {
                     CreateOrder();
                 }
@@ -256,10 +265,10 @@ public class OrderManager : MonoBehaviour
     {
         GameObject sleigh = Instantiate(sleighPrefab, orderStartPositon, Quaternion.Euler(orderStartRotation));
         // add the correct tree size
-        GameObject sleighTree = Instantiate(christmasTreePrefabs[(int)christmasTreesOrdered[currentOrder].ChristmasTreeSize], sleigh.transform);
-        sleighTree.transform.position = christmasTreeOffset;
+        //GameObject sleighTree = Instantiate(christmasTreePrefabs[(int)christmasTreesOrdered[currentOrder].ChristmasTreeSize], sleigh.transform);
+        //sleighTree.transform.localPosition = christmasTreeTag.transform.localPosition;
         sleigh.GetComponent<OrderHandler>().MyOrder = christmasTreesOrdered[currentOrder];
-        sleigh.GetComponent<OrderHandler>().SetOrderData(currentOrder, orderStartPositon.x, orderOOBXPosition);
+        sleigh.GetComponent<OrderHandler>().SetOrderData(currentOrder, orderStartPositon.x, orderOOBXPosition, christmasTreePrefabs[(int)christmasTreesOrdered[currentOrder].ChristmasTreeSize]);
         ordersOnScreen.Add(sleigh);
         currentOrder++;
     }

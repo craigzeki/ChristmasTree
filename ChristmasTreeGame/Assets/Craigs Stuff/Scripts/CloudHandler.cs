@@ -48,7 +48,7 @@ public class CloudHandler : MonoBehaviour
         }
     }
 
-    public void markDecorationAsDone(int decorationIndex)
+    public void markDecorationAsDone(int decorationIndex, DecorationType decorationType)
     {
         if(decorationIndex >= myDecorations.Count)
         {
@@ -57,7 +57,7 @@ public class CloudHandler : MonoBehaviour
         }
         else
         {
-            myDecorations[decorationIndex].GetComponent<Image>().sprite = decorationsComplete2D[decorationIndex];
+            myDecorations[decorationIndex].GetComponent<Image>().sprite = decorationsComplete2D[(int)decorationType];
             myCompleteIcons[decorationIndex].SetActive(true);
         }
         

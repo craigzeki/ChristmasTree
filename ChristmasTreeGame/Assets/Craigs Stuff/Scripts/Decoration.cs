@@ -7,6 +7,7 @@ public enum DecorationType : int
     Star = 0,
     Bow,
     Bauble,
+    Gift,
     //New decorations here
     NumOfDecorations
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OrderHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject christmasTreeTag;
     private ChristmasTreeOrder myOrder;
     private float myOOBXPosition;
     private float myStartXPosition;
@@ -12,16 +13,21 @@ public class OrderHandler : MonoBehaviour
     private int distanceTravelledPercent = 0;
     private CloudHandler myCloud;
     private int myOrderIndex;
+    private Bounds myBounds;
+    private GameObject myTree;
 
-    public ChristmasTreeOrder MyOrder { set => myOrder = value; }
+    public ChristmasTreeOrder MyOrder { get => myOrder;  set => myOrder = value; }
     public int MyOrderIndex { get => myOrderIndex; }
 
-    public void SetOrderData(int orderIndex, float startXPosition, float oobXPosition)
+    public void SetOrderData(int orderIndex, float startXPosition, float oobXPosition, GameObject christmasTree)
     {
         myOrderIndex = orderIndex;
         myStartXPosition = Mathf.RoundToInt(startXPosition);
         myOOBXPosition = Mathf.RoundToInt(oobXPosition);
         distanceToTravel = myOOBXPosition - myStartXPosition;
+        myTree = Instantiate(christmasTree, this.gameObject.transform);
+        myTree.transform.localPosition = christmasTreeTag.transform.localPosition;
+        RefreshBounds();
     }
 
     private void Awake()
@@ -34,6 +40,17 @@ public class OrderHandler : MonoBehaviour
     {
         myCloud = GetComponentInChildren<CloudHandler>();
         myCloud.AddDecorations(myOrder.DecorationsRequired);
+
+        RefreshBounds();
+    }
+
+    public void RefreshBounds()
+    {
+        myBounds = new Bounds(transform.position, Vector3.zero);
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            myBounds.Encapsulate(r.bounds);
+        }
     }
 
     // Update is called once per frame
@@ -48,9 +65,9 @@ public class OrderHandler : MonoBehaviour
             }
             else
             {
-                transform.position += new Vector3(myOrder.Speed, 0, 0);
+                transform.position += new Vector3(myOrder.Speed, 0, 0) * Time.deltaTime;
                 float distanceTravelled = transform.position.x - myStartXPosition;
-                distanceTravelledPercent = Mathf.RoundToInt((distanceTravelled / distanceToTravel) * 100.0f);
+                distanceTravelledPercent = Mathf.RoundToInt((distanceTravelled / (distanceToTravel + myBounds.size.x)) * 100.0f);
                 myOrder.OrderDistancePercentage = distanceTravelledPercent;
                 Debug.Log("Distance Travelled %: " + myOrder.OrderDistancePercentage.ToString());
             }
@@ -75,7 +92,7 @@ public class OrderHandler : MonoBehaviour
 
                 if (result)
                 {
-                    myCloud.markDecorationAsDone(i);
+                    myCloud.markDecorationAsDone(i, decoration.MyDecorationType);
                     break;
                 }
             }
@@ -97,7 +114,8 @@ public class OrderHandler : MonoBehaviour
                     // decoration placed
                     // play placed sound
                     // tell the decoration to destroy itself
-                    theDecoration.DestroyDecoration();
+                    myTree.GetComponent<TreeHandler>().PlaceDecoration(other.gameObject);
+                    //theDecoration.DestroyDecoration();
                     Debug.Log("Order Points: " + myOrder.Points.ToString());
                 }
                 else
