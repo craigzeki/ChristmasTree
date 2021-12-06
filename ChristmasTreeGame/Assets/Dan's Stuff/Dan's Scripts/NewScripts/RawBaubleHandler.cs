@@ -9,6 +9,7 @@ public class RawBaubleHandler : MonoBehaviour, iDecoration
     private RawBaubleDecoration myDeco;
 
     public bool upgrading = false;
+    public bool completed = false;
 
     [SerializeField] private float upgradeTimer = 0f;
     public void DestroyDecoration()
@@ -47,7 +48,13 @@ public class RawBaubleHandler : MonoBehaviour, iDecoration
         if (upgrading)
         {
             upgradeTimer += Time.deltaTime;
-            Debug.Log("Upgrading");
+            
+
+            if(upgradeTimer >= 15f)
+            {
+                upgradeTimer = 15f;
+                completed = true;
+            }
         }
     }
 }

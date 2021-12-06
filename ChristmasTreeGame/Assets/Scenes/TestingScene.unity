@@ -431,6 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
+  completeItem: {fileID: 1613777359082422134, guid: dd4eb545ca445484f99e3498defa4547, type: 3}
   objectOnStation: 0
 --- !u!114 &231222365
 MonoBehaviour:

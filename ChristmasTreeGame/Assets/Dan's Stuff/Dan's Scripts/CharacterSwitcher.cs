@@ -22,6 +22,8 @@ public class CharacterSwitcher : MonoBehaviour
     {
         //Pick a random character from the character array
         //index = Random.Range(0, characters.Length);
+
+        /*
         bool changeCharacter = true;
         if (changeCharacter)
         {
@@ -31,11 +33,11 @@ public class CharacterSwitcher : MonoBehaviour
         if(index != characters.Length)
         {
             Debug.Log(index.ToString());
-            manager.playerPrefab = characters[index];
+            
         }
-
-
-        
+        */
+        index = Random.Range(0, characters.Length);
+        manager.playerPrefab = characters[index];
     }
     
 }
