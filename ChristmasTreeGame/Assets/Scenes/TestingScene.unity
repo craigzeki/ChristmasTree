@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1166089721}
         m_TargetAssemblyTypeName: CharacterSwitcher, Assembly-CSharp
         m_MethodName: ChangeAvatarOnJoin
         m_Mode: 0
@@ -1521,7 +1521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters:
   - {fileID: 9219216117268137884, guid: de57a81740c47f944b7d559ba001f71a, type: 3}
-  - {fileID: 9219216117268137884, guid: de57a81740c47f944b7d559ba001f71a, type: 3}
+  - {fileID: 6281601870403652916, guid: e2de20e3cd0c97b4290dbee242e62833, type: 3}
 --- !u!1001 &1175601594
 PrefabInstance:
   m_ObjectHideFlags: 0
