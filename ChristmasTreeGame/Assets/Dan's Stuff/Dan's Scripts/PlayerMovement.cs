@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravity = -9.81f;
 
+    private Vector3 moveValue;
+
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -41,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        //movementInput = value;
         movementInput = context.ReadValue<Vector2>();
         movementInput = Vector2.SmoothDamp(movementInput, currentInputVector, ref smoothInputVelocity, smoothInputSpeed);
     }

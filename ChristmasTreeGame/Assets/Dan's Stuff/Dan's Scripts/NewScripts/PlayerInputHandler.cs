@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
@@ -10,12 +11,30 @@ public class PlayerInputHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerMovement = GameObject.Instantiate(prefabs[Random.Range(0, prefabs.Count)], transform.position, transform.rotation).GetComponent<PlayerMovement>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        
+        if (playerMovement)
+        {
+            //playerMovement.OnMove(context.ReadValue<Vector2>());
+        }
+    }
+
+    public void OnGrab(InputAction.CallbackContext context)
+    {
+        if(playerMovement && context.started)
+        {
+            playerMovement.OnGrab(context);
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if(playerMovement && context.started)
+        {
+            playerMovement.OnInteract(context);
+        }
     }
 }
