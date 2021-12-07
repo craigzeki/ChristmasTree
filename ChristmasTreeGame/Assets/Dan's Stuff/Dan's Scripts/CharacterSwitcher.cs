@@ -10,6 +10,7 @@ public class CharacterSwitcher : MonoBehaviour
     //[SerializeField] private List<GameObject> avatars = new List<GameObject>();
     [SerializeField] private GameObject[] characters;
 
+    private PlayerInput playerInputNew;
 
     public InputActionAsset inputActions;
     // Start is called before the first frame update
@@ -23,27 +24,32 @@ public class CharacterSwitcher : MonoBehaviour
 
     public void ChangeAvatarOnJoin(PlayerInput input)
     {
-        
-        //Pick a random character from the character array
-        //index = Random.Range(0, characters.Length);
+        Debug.Log(index);
+        /*
+        index++;
+        if (index >= characters.Length - 1)
+        {
+            index = 0;
+        }
+        */
 
-        
-        bool changeCharacter = true;
-        if (changeCharacter)
+        //index = Random.Range(0, characters.Length);
+        if(index <= characters.Length)
         {
             index++;
-            changeCharacter = false;
-        }
-        if(index != characters.Length)
-        {
-            Debug.Log(index.ToString());
-            
         }
         
-        //index = Random.Range(0, characters.Length);
-        manager.playerPrefab.GetComponentInChildren<PlayerInput>().actions = inputActions;
         manager.playerPrefab = characters[index];
         
+
+        /*
+        if (manager.playerPrefab.GetComponentInChildren<PlayerInput>().actions == null)
+        {
+            //playerInputNew = manager.playerPrefab.GetComponentInChildren<PlayerInput>();
+            manager.playerPrefab.AddComponent<PlayerInput>().actions = inputActions;
+        }
+        */
+
         /*
         if (manager.playerPrefab.GetComponentInChildren<PlayerInput>().actions == null)
         {
@@ -51,6 +57,23 @@ public class CharacterSwitcher : MonoBehaviour
             manager.playerPrefab.GetComponentInChildren<PlayerInput>().actions = inputActions;
         }
         */
+    }
+
+    private void Update()
+    {
+        
+        GameObject[] playerList = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject players in playerList)
+        {
+            if(players.gameObject.GetComponent<PlayerInput>().actions == null)
+            {
+                players.gameObject.GetComponent<PlayerInput>().actions = inputActions;
+                Debug.Log("Adding component");
+            }
+            
+        }
+        
+        
     }
 
     private void AddComponentToChild()

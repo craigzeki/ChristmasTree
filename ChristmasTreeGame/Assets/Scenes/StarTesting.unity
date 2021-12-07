@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: 4
+  m_MaxPlayerCount: 3
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
@@ -1411,6 +1411,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters:
   - {fileID: 9219216117268137884, guid: de57a81740c47f944b7d559ba001f71a, type: 3}
+  - {fileID: 6281601870403652916, guid: e2de20e3cd0c97b4290dbee242e62833, type: 3}
+  - {fileID: 3826145896188570334, guid: 1648d75361d6fab4db6d720ce62c07c6, type: 3}
   - {fileID: 6281601870403652916, guid: e2de20e3cd0c97b4290dbee242e62833, type: 3}
   inputActions: {fileID: -944628639613478452, guid: fca108b0586f6b84f9c8ab8eec3cf0dd, type: 3}
 --- !u!1001 &1175601594
@@ -1799,6 +1801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1833163850}
   - component: {fileID: 1833163849}
+  - component: {fileID: 1833163851}
   m_Layer: 0
   m_Name: Game Event System
   m_TagString: Untagged
@@ -1832,6 +1835,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1833163851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833163848}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b407a7166712d148b2c5c7f9c8e332b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab:
+  - {fileID: 9219216117268137884, guid: de57a81740c47f944b7d559ba001f71a, type: 3}
+  - {fileID: 6281601870403652916, guid: e2de20e3cd0c97b4290dbee242e62833, type: 3}
+  numOfPlayers: 2
+  inputActions: {fileID: -944628639613478452, guid: fca108b0586f6b84f9c8ab8eec3cf0dd, type: 3}
 --- !u!1001 &1848069292
 PrefabInstance:
   m_ObjectHideFlags: 0
