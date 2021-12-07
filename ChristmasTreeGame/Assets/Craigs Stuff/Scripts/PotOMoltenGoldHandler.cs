@@ -39,7 +39,7 @@ public class PotOMoltenGoldHandler : MonoBehaviour, iDecoration
 
     private void Awake()
     {
-        myDeco = new PotOMoltenGoldDecoration(points, multiplier);
+        myDeco = new PotOMoltenGoldDecoration(points, multiplier, upgradeMethod);
     }
 
     // Start is called before the first frame update
@@ -53,5 +53,9 @@ public class PotOMoltenGoldHandler : MonoBehaviour, iDecoration
     void Update()
     {
         myDeco.Upgrade(upgradeMethod);
+    }
+    public UpgradeMethod GetUpgradeMethod()
+    {
+        return myDeco.MyUpgradeMethod;
     }
 }

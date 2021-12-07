@@ -42,10 +42,25 @@ public class StationTriggerAreaTest : MonoBehaviour
         {
             if(other.gameObject.GetComponent<iDecoration>().GetUpgradeComplete())
             {
-                other.gameObject.GetComponent<iDecoration>().DestroyDecoration();
 
-                isComplete = true;
-                CompleteItem(other);
+                if (other.gameObject.GetComponent<iDecoration>().GetUpgradeMethod() == UpgradeMethod.simpleAddItemsTogether)
+                {
+                    other.gameObject.GetComponent<iDecoration>().DestroyDecoration();
+
+                    isComplete = true;
+                    CompleteItem();
+                    Destroy(this.gameObject.transform.parent.gameObject);
+                }
+                else
+                {
+                    other.gameObject.GetComponent<iDecoration>().DestroyDecoration();
+
+                    isComplete = true;
+                    CompleteItem();
+                }
+                
+
+                
             }
         }
         
@@ -63,11 +78,11 @@ public class StationTriggerAreaTest : MonoBehaviour
         */
     }
 
-    private void CompleteItem(Collider decoration)
+    private void CompleteItem()
     {
         if (isComplete)
         {
-            GameObject tempCompleteItem = (GameObject)Instantiate(completeItem, transform.position, transform.rotation);
+            GameObject tempCompleteItem = (GameObject)Instantiate(completeItem, this.gameObject.transform.parent.transform.position, this.gameObject.transform.parent.transform.rotation);
             isComplete = false;
         }
     }

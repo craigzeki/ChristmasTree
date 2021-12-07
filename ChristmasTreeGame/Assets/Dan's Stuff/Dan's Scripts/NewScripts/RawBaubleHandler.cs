@@ -31,7 +31,7 @@ public class RawBaubleHandler : MonoBehaviour, iDecoration
 
     private void Awake()
     {
-        myDeco = new RawBaubleDecoration(points, multiplier);
+        myDeco = new RawBaubleDecoration(points, multiplier, upgradeMethod);
     }
 
     // Start is called before the first frame update
@@ -57,5 +57,9 @@ public class RawBaubleHandler : MonoBehaviour, iDecoration
     public bool GetUpgradeComplete()
     {
         return myDeco.Completed;
+    }
+    public UpgradeMethod GetUpgradeMethod()
+    {
+        return myDeco.MyUpgradeMethod;
     }
 }

@@ -16,7 +16,7 @@ public enum DecorationType : int
     //New decorations here
     NumOfDecorations
 }
-public enum UpgradeMethod : int { noMethod = 0, timeBased, buttonMash, numOfUpgradeMethods }
+public enum UpgradeMethod : int { noMethod = 0, timeBased, buttonMash, simpleAddItemsTogether, numOfUpgradeMethods }
 public class Decoration
 {
 
@@ -30,14 +30,18 @@ public class Decoration
     public DecorationType MyDecorationType { get => myDecorationType; }
     public bool Upgrading { get => upgrading; set => upgrading = value; }
     public bool Completed { get => completed; }
+    public UpgradeMethod MyUpgradeMethod { get => myUpgradeMethod; }
+
+    private UpgradeMethod myUpgradeMethod;
 
     //constructor
-    public Decoration(DecorationType decorationType, int points)
+    public Decoration(DecorationType decorationType, int points, UpgradeMethod upgradeMethod)
     {
         this.points = points;
         myDecorationType = decorationType;
         upgrading = false;
         completed = false;
+        myUpgradeMethod = upgradeMethod;
     }
 
     //declared virtual so that it can be overriden if needed
@@ -65,6 +69,11 @@ public class Decoration
                     break;
                 case UpgradeMethod.numOfUpgradeMethods:
                     break;
+                case UpgradeMethod.noMethod:
+                    break;
+                case UpgradeMethod.simpleAddItemsTogether:
+                    SimpleAddItemsTogether();
+                    break;
                 default:
                     break;
             }
@@ -80,5 +89,10 @@ public class Decoration
             upgradeTimer = 15f;
             completed = true;
         }
+    }
+
+    private void SimpleAddItemsTogether()
+    {
+        completed = true;
     }
 }

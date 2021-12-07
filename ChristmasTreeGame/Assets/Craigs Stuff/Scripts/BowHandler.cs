@@ -26,7 +26,10 @@ public class BowHandler : MonoBehaviour, iDecoration
             return null;
         }
     }
-
+    public UpgradeMethod GetUpgradeMethod()
+    {
+        return myDeco.MyUpgradeMethod;
+    }
     public bool GetUpgradeComplete()
     {
         throw new System.NotImplementedException();
@@ -39,7 +42,7 @@ public class BowHandler : MonoBehaviour, iDecoration
 
     private void Awake()
     {
-        myDeco = new BowDecoration(points, multiplier);
+        myDeco = new BowDecoration(points, multiplier, upgradeMethod);
     }
 
     // Start is called before the first frame update

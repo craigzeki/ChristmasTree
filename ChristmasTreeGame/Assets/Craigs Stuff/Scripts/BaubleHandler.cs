@@ -32,6 +32,11 @@ public class BaubleHandler : MonoBehaviour, iDecoration
         throw new System.NotImplementedException();
     }
 
+    public UpgradeMethod GetUpgradeMethod()
+    {
+        return myDeco.MyUpgradeMethod;
+    }
+
     public void SetUpgrading(bool state)
     {
         throw new System.NotImplementedException();
@@ -39,7 +44,7 @@ public class BaubleHandler : MonoBehaviour, iDecoration
 
     private void Awake()
     {
-        myDeco = new BaubleDecoration(points, multiplier);
+        myDeco = new BaubleDecoration(points, multiplier, upgradeMethod);
     }
 
     // Start is called before the first frame update

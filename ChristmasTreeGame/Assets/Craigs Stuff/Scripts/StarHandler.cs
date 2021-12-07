@@ -38,7 +38,7 @@ public class StarHandler : MonoBehaviour, iDecoration
 
     private void Awake()
     {
-        myDeco = new StarDecoration(points, multiplier);
+        myDeco = new StarDecoration(points, multiplier, upgradeMethod);
     }
 
     // Start is called before the first frame update
@@ -51,5 +51,9 @@ public class StarHandler : MonoBehaviour, iDecoration
     void Update()
     {
         myDeco.Upgrade(upgradeMethod);
+    }
+    public UpgradeMethod GetUpgradeMethod()
+    {
+        return myDeco.MyUpgradeMethod;
     }
 }

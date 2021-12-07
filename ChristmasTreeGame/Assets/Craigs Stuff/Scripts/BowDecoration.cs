@@ -6,7 +6,7 @@ public class BowDecoration : Decoration
 {
 
     private int bonusMultiplier = 2;
-    public BowDecoration(int points, int bonusMultiplier) : base(DecorationType.Bow, points)
+    public BowDecoration(int points, int bonusMultiplier, UpgradeMethod upgradeMethod) : base(DecorationType.Bow, points, upgradeMethod)
     {
         this.bonusMultiplier = bonusMultiplier;
     }

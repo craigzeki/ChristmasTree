@@ -7,7 +7,7 @@ public class ItemCentre : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Decoration")
+        if(other.gameObject.tag == "Decoration" || other.gameObject.tag == "MoveableObject")
         {
             if (!other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
             {

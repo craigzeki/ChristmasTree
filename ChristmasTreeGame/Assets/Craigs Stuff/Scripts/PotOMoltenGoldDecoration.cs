@@ -6,7 +6,7 @@ public class PotOMoltenGoldDecoration : Decoration
 {
 
     private int bonusMultiplier = 2;
-    public PotOMoltenGoldDecoration(int points, int bonusMultiplier) : base(DecorationType.PotOMoltenGold, points)
+    public PotOMoltenGoldDecoration(int points, int bonusMultiplier, UpgradeMethod upgradeMethod) : base(DecorationType.PotOMoltenGold, points, upgradeMethod)
     {
         this.bonusMultiplier = bonusMultiplier;
     }

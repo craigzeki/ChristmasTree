@@ -10,4 +10,6 @@ public interface iDecoration
     void SetUpgrading(bool state);
 
     bool GetUpgradeComplete();
+
+    UpgradeMethod GetUpgradeMethod();
 }

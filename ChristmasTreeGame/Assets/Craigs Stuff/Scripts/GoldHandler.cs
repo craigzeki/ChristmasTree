@@ -26,20 +26,23 @@ public class GoldHandler : MonoBehaviour, iDecoration
             return null;
         }
     }
-
+    public UpgradeMethod GetUpgradeMethod()
+    {
+        return myDeco.MyUpgradeMethod;
+    }
     public bool GetUpgradeComplete()
     {
-        throw new System.NotImplementedException();
+        return myDeco.Completed;
     }
 
     public void SetUpgrading(bool state)
     {
-        throw new System.NotImplementedException();
+        myDeco.Upgrading = true;
     }
 
     private void Awake()
     {
-        myDeco = new GoldDecoration(points, multiplier);
+        myDeco = new GoldDecoration(points, multiplier, upgradeMethod);
     }
 
     // Start is called before the first frame update

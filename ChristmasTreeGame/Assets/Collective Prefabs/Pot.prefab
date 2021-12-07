@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 7510118217471147739}
   - component: {fileID: 6473280853149663161}
   - component: {fileID: 3867586530320872829}
-  - component: {fileID: 5316706941440191804}
+  - component: {fileID: 99857210065060335}
   m_Layer: 0
   m_Name: ItemTriggerArea
   m_TagString: Untagged
@@ -75,8 +75,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.63802505, y: 0.9603604, z: 0.6913036}
-  m_Center: {x: 0.2587713, y: -0.27330106, z: -0.5542571}
+  m_Size: {x: 0.63802505, y: 1.2660912, z: 0.6913036}
+  m_Center: {x: 0.2587713, y: -0.120435655, z: -0.5542571}
 --- !u!114 &3867586530320872829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b060389d76c7e84188c05c083f35622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5316706941440191804
+--- !u!114 &99857210065060335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,10 +98,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6304599888396420091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c1ad20261ddd44aa21892e9f98f623, type: 3}
+  m_Script: {fileID: 11500000, guid: c4a133f8964da6541b0850788753a443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 9004569236407213915, guid: 04936a7647cbb154185ab1b52a393af7, type: 3}
+  id: 0
+  decoExpected: 5
+  completeItem: {fileID: 9004569236407213915, guid: 04936a7647cbb154185ab1b52a393af7, type: 3}
+  objectOnStation: 0
 --- !u!1 &8649255184120921504
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +651,7 @@ GameObject:
   - component: {fileID: 6289365023699188020}
   m_Layer: 20
   m_Name: Pot
-  m_TagString: Untagged
+  m_TagString: MoveableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
