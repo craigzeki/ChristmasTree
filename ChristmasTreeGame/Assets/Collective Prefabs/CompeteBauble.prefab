@@ -93,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: 10
   multiplier: 1
+  upgradeMethod: 0
 --- !u!1 &1613777359082422142
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +154,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: abce592dfdafc4e4aa552eea00807000, type: 3}
+  - {fileID: 2100000, guid: d8fb404e186b85c4191e984a19522562, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
