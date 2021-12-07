@@ -139,7 +139,7 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
 
     public void UpgradeComplete()
     {
-        if (potState++ == PotState.NumOfStates)
+        if (++potState == PotState.NumOfStates)
         {
             potState = PotState.Empty;
         }
@@ -163,10 +163,12 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
 
     public bool GetUpgradeComplete()
     {
+        /*
         if(myDeco.Completed)
         {
             UpgradeComplete();
         }
+        */
         return myDeco.Completed;
     }
 

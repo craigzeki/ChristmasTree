@@ -11,6 +11,10 @@ public class StationTriggerAreaTest : MonoBehaviour
     private Collider tempCollider;
     [SerializeField] private DecorationType decoExpected;
     [SerializeField] private GameObject completeItem;
+    [SerializeField] private GameObject interactableStationObject;
+    [SerializeField] private GameObject interactableObjectLocationTag;
+
+    private DecorationType backupDecoType;
 
     private bool isComplete = false;
 
@@ -33,6 +37,22 @@ public class StationTriggerAreaTest : MonoBehaviour
                 //GameEvents.current.StationHolderTriggerEnter(id);
             }
         }
+        else if(other.gameObject.tag == "MoveableObject")
+        {
+            if (other.gameObject.GetComponentInChildren<iDecoration>().GetDecoration().MyDecorationType == decoExpected)
+            {
+                
+                other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(true);
+
+                tempCollider = other;
+
+
+
+
+                //Call the event from game events 
+                //GameEvents.current.StationHolderTriggerEnter(id);
+            }
+        }
         
     }
 
@@ -42,7 +62,7 @@ public class StationTriggerAreaTest : MonoBehaviour
         {
             if(other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeComplete())
             {
-
+                decoExpected = backupDecoType;
                 if (other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeMethod() == UpgradeMethod.AddTogether)
                 {
                     other.gameObject.GetComponentInChildren<iDecoration>().DestroyDecoration();
@@ -62,8 +82,24 @@ public class StationTriggerAreaTest : MonoBehaviour
 
                 
             }
+            else
+            {
+                
+                other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(true);
+            }
+            
         }
-        
+        else if (other.tag == "MoveableObject" && other.gameObject.GetComponentInChildren<iDecoration>().GetDecoration().MyDecorationType == decoExpected)
+        {
+            if (other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeComplete())
+            {
+
+                isComplete = true;
+                CompleteMobileStation(other.gameObject);
+
+            }
+        }
+
         /*
         if (other.gameObject.GetComponent<RawBaubleHandler>() != null)
         {
@@ -78,6 +114,26 @@ public class StationTriggerAreaTest : MonoBehaviour
         */
     }
 
+    private void CompleteMobileStation(GameObject mobileStation)
+    {
+        if(isComplete)
+        {
+            if (mobileStation.GetComponentInChildren<iDecoration>().GetUpgradeMethod() == UpgradeMethod.RemoveFrom)
+            {
+                if(interactableStationObject != null)
+                {
+                    GameObject temp = Instantiate(interactableStationObject, interactableObjectLocationTag.transform.position, interactableObjectLocationTag.transform.rotation);
+                    backupDecoType = decoExpected;
+                    decoExpected = temp.GetComponentInChildren<iDecoration>().GetDecoration().MyDecorationType;
+                    objectOnStation = true;
+                }    
+            }
+            mobileStation.GetComponentInChildren<iMobileStation>().UpgradeComplete();
+            
+            isComplete = false;
+        }
+    }    
+
     private void CompleteItem()
     {
         if (isComplete)
@@ -90,7 +146,7 @@ public class StationTriggerAreaTest : MonoBehaviour
     public void OnTriggerExit(Collider other)
     {
         
-        if(other.gameObject.tag == "Decoration")
+        if(other.gameObject.tag == "Decoration" || other.gameObject.tag == "MoveableObject")
         {
             if (other.gameObject.GetComponentInChildren<iDecoration>().GetDecoration().MyDecorationType == decoExpected && other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
             {
@@ -103,5 +159,10 @@ public class StationTriggerAreaTest : MonoBehaviour
         
 
             
+    }
+
+    private void Start()
+    {
+        backupDecoType = decoExpected;
     }
 }

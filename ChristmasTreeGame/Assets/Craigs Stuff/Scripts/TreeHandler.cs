@@ -123,6 +123,7 @@ public class TreeHandler : MonoBehaviour
             {
                 decorationTransform.localPosition = decoTags[i].transform.localPosition;
                 decorationTransform.localScale = decoTags[i].transform.localScale;
+                decorationTransform.localEulerAngles = decoTags[i].transform.localEulerAngles;
                 decorationPlacedStates[i] = DecorationPlacedState.Placed;
                 result = true;
                 break;

@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 515870588620804890}
   - component: {fileID: 5968917588974068156}
   m_Layer: 20
-  m_Name: 041 Xmas_Bell
+  m_Name: RawBauble
   m_TagString: Decoration
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,6 +13,7 @@ public enum DecorationType : int
     Pot,
     PotOGold,
     PotOMoltenGold,
+    MoltenStar,
     RawRibbon, 
     Ribbon,
     //New decorations here
@@ -32,7 +33,15 @@ public class Decoration
     public DecorationType MyDecorationType { get => myDecorationType; set => myDecorationType = value; }
     public bool Upgrading { get => upgrading; set => upgrading = value; }
     public bool Completed { get => completed; }
-    public UpgradeMethod MyUpgradeMethod { get => myUpgradeMethod; set => myUpgradeMethod = value; }
+    public UpgradeMethod MyUpgradeMethod
+    {
+        get => myUpgradeMethod; set
+        {
+            myUpgradeMethod = value;
+            completed = false;
+            upgradeTimer = 0;
+        }
+    }
 
     private UpgradeMethod myUpgradeMethod;
 
@@ -69,12 +78,16 @@ public class Decoration
                     break;
                 case UpgradeMethod.ButtonMash:
                     break;
-                case UpgradeMethod.NumOfUpgradeMethods:
-                    break;
+                
                 case UpgradeMethod.NoMethod:
                     break;
                 case UpgradeMethod.AddTogether:
                     SimpleAddItemsTogether();
+                    break;
+                case UpgradeMethod.RemoveFrom:
+                    SimpleRemoveFrom();
+                    break;
+                case UpgradeMethod.NumOfUpgradeMethods:
                     break;
                 default:
                     break;
@@ -94,6 +107,11 @@ public class Decoration
     }
 
     private void SimpleAddItemsTogether()
+    {
+        completed = true;
+    }
+
+    private void SimpleRemoveFrom()
     {
         completed = true;
     }

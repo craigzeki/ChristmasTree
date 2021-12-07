@@ -60,7 +60,9 @@ public class OrderManager : MonoBehaviour
         ChristmasTreeOrder order3 = new ChristmasTreeOrder(justStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Small], ChristmasTreeSize.Small);
         ChristmasTreeOrder order4 = new ChristmasTreeOrder(BowBaubleBaubleStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
 
-        christmasTreesOrdered = new List<ChristmasTreeOrder> { order5, order1, order2, order3, order4 };
+        christmasTreesOrdered = new List<ChristmasTreeOrder> { order1, order5, order2, order3, order4 };
+
+        OnSpawnOrder();
     }
 
     private void OnStart()
@@ -294,4 +296,5 @@ public class OrderManager : MonoBehaviour
                 break;
         }
     }
+
 }
