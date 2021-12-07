@@ -597,6 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: 10
   multiplier: 1
+  upgradeMethod: 1
 --- !u!54 &2206324074794392428
 Rigidbody:
   m_ObjectHideFlags: 0

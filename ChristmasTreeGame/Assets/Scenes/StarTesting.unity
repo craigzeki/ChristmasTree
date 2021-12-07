@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
+  canSpawn: 1
 --- !u!65 &16461538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -844,6 +845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
+  canSpawn: 0
 --- !u!65 &751099494
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1230,6 +1232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
+  canSpawn: 0
 --- !u!65 &1054535205
 BoxCollider:
   m_ObjectHideFlags: 0
