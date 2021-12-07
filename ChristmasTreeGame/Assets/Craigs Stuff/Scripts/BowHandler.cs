@@ -8,7 +8,7 @@ public class BowHandler : MonoBehaviour, iDecoration
     [SerializeField] private int multiplier = 1;
     private BowDecoration myDeco;
 
-    [SerializeField] private UpgradeMethod upgradeMethod = UpgradeMethod.noMethod;
+    [SerializeField] private UpgradeMethod upgradeMethod = UpgradeMethod.NoMethod;
 
     public void DestroyDecoration()
     {

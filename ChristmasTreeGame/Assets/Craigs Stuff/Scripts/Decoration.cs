@@ -16,7 +16,7 @@ public enum DecorationType : int
     //New decorations here
     NumOfDecorations
 }
-public enum UpgradeMethod : int { noMethod = 0, timeBased, buttonMash, simpleAddItemsTogether, numOfUpgradeMethods }
+public enum UpgradeMethod : int { NoMethod = 0, TimeBased, ButtonMash, AddTogether, RemoveFrom, NumOfUpgradeMethods }
 public class Decoration
 {
 
@@ -27,10 +27,10 @@ public class Decoration
     //protected so that the children classes can access
     protected int points = 0;
 
-    public DecorationType MyDecorationType { get => myDecorationType; }
+    public DecorationType MyDecorationType { get => myDecorationType; set => myDecorationType = value; }
     public bool Upgrading { get => upgrading; set => upgrading = value; }
     public bool Completed { get => completed; }
-    public UpgradeMethod MyUpgradeMethod { get => myUpgradeMethod; }
+    public UpgradeMethod MyUpgradeMethod { get => myUpgradeMethod; set => myUpgradeMethod = value; }
 
     private UpgradeMethod myUpgradeMethod;
 
@@ -62,16 +62,16 @@ public class Decoration
         {
             switch (upgradeMethod)
             {
-                case UpgradeMethod.timeBased:
+                case UpgradeMethod.TimeBased:
                     TimeUpgrade();
                     break;
-                case UpgradeMethod.buttonMash:
+                case UpgradeMethod.ButtonMash:
                     break;
-                case UpgradeMethod.numOfUpgradeMethods:
+                case UpgradeMethod.NumOfUpgradeMethods:
                     break;
-                case UpgradeMethod.noMethod:
+                case UpgradeMethod.NoMethod:
                     break;
-                case UpgradeMethod.simpleAddItemsTogether:
+                case UpgradeMethod.AddTogether:
                     SimpleAddItemsTogether();
                     break;
                 default:

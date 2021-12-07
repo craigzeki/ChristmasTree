@@ -19,10 +19,10 @@ public class StationTriggerAreaTest : MonoBehaviour
     {
         if(other.gameObject.tag == "Decoration")
         {
-            if (other.gameObject.GetComponent<iDecoration>().GetDecoration().MyDecorationType == decoExpected && !other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
+            if (other.gameObject.GetComponentInChildren<iDecoration>().GetDecoration().MyDecorationType == decoExpected && !other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
             {
                 objectOnStation = true;
-                other.gameObject.GetComponent<iDecoration>().SetUpgrading(true);
+                other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(true);
 
                 tempCollider = other;
 
@@ -38,14 +38,14 @@ public class StationTriggerAreaTest : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Decoration" && other.gameObject.GetComponent<iDecoration>().GetDecoration().MyDecorationType == decoExpected)
+        if(other.tag == "Decoration" && other.gameObject.GetComponentInChildren<iDecoration>().GetDecoration().MyDecorationType == decoExpected)
         {
-            if(other.gameObject.GetComponent<iDecoration>().GetUpgradeComplete())
+            if(other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeComplete())
             {
 
-                if (other.gameObject.GetComponent<iDecoration>().GetUpgradeMethod() == UpgradeMethod.simpleAddItemsTogether)
+                if (other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeMethod() == UpgradeMethod.AddTogether)
                 {
-                    other.gameObject.GetComponent<iDecoration>().DestroyDecoration();
+                    other.gameObject.GetComponentInChildren<iDecoration>().DestroyDecoration();
 
                     isComplete = true;
                     CompleteItem();
@@ -53,7 +53,7 @@ public class StationTriggerAreaTest : MonoBehaviour
                 }
                 else
                 {
-                    other.gameObject.GetComponent<iDecoration>().DestroyDecoration();
+                    other.gameObject.GetComponentInChildren<iDecoration>().DestroyDecoration();
 
                     isComplete = true;
                     CompleteItem();
@@ -92,10 +92,10 @@ public class StationTriggerAreaTest : MonoBehaviour
         
         if(other.gameObject.tag == "Decoration")
         {
-            if (other.gameObject.GetComponent<iDecoration>().GetDecoration().MyDecorationType == decoExpected && other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
+            if (other.gameObject.GetComponentInChildren<iDecoration>().GetDecoration().MyDecorationType == decoExpected && other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
             {
                 objectOnStation = false;
-                other.gameObject.GetComponent<iDecoration>().SetUpgrading(false);
+                other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(false);
                 //GameEvents.current.StationHolderTriggerExit(id);
             }
         }

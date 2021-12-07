@@ -8,7 +8,7 @@ public class BaubleHandler : MonoBehaviour, iDecoration
     [SerializeField] private int multiplier = 1;
     private BaubleDecoration myDeco;
 
-    [SerializeField] private UpgradeMethod upgradeMethod = UpgradeMethod.noMethod;
+    [SerializeField] private UpgradeMethod upgradeMethod = UpgradeMethod.NoMethod;
 
     public void DestroyDecoration()
     {
