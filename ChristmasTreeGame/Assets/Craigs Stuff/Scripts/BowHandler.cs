@@ -8,6 +8,8 @@ public class BowHandler : MonoBehaviour, iDecoration
     [SerializeField] private int multiplier = 1;
     private BowDecoration myDeco;
 
+    [SerializeField] private UpgradeMethod upgradeMethod = UpgradeMethod.noMethod;
+
     public void DestroyDecoration()
     {
         Destroy(this.gameObject);
@@ -49,6 +51,6 @@ public class BowHandler : MonoBehaviour, iDecoration
     // Update is called once per frame
     void Update()
     {
-        
+        myDeco.Upgrade(upgradeMethod);
     }
 }

@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7498302547351100363}
   - component: {fileID: 4579459880968637344}
   - component: {fileID: 515870588620804890}
-  - component: {fileID: 8717524151855845361}
+  - component: {fileID: 5968917588974068156}
   m_Layer: 20
   m_Name: 041 Xmas_Bell
   m_TagString: Decoration
@@ -175,7 +175,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &8717524151855845361
+--- !u!114 &5968917588974068156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,3 +189,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: 10
   multiplier: 1
+  upgradeMethod: 1

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StationTriggerArea : MonoBehaviour
 {
+    /*
     public int id;
 
     private Collider tempCollider;
@@ -75,4 +76,5 @@ public class StationTriggerArea : MonoBehaviour
 
             
     }
+    */
 }

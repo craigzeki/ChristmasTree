@@ -8,7 +8,7 @@ public class PotOMoltenGoldHandler : MonoBehaviour, iDecoration
     [SerializeField] private int multiplier = 1;
     private PotOMoltenGoldDecoration myDeco;
 
-
+    [SerializeField] private UpgradeMethod upgradeMethod;
 
     public void DestroyDecoration()
     {
@@ -52,6 +52,6 @@ public class PotOMoltenGoldHandler : MonoBehaviour, iDecoration
     // Update is called once per frame
     void Update()
     {
-
+        myDeco.Upgrade(upgradeMethod);
     }
 }

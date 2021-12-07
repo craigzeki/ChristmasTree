@@ -8,6 +8,7 @@ public class StarHandler : MonoBehaviour, iDecoration
     [SerializeField] private int multiplier = 1;
     private StarDecoration myDeco;
 
+    [SerializeField] private UpgradeMethod upgradeMethod;
     public void DestroyDecoration()
     {
         Destroy(this.gameObject);
@@ -49,6 +50,6 @@ public class StarHandler : MonoBehaviour, iDecoration
     // Update is called once per frame
     void Update()
     {
-        
+        myDeco.Upgrade(upgradeMethod);
     }
 }

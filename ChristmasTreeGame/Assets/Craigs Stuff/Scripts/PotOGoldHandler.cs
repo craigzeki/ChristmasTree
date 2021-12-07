@@ -8,9 +8,9 @@ public class PotOGoldHandler : MonoBehaviour, iDecoration
     [SerializeField] private int multiplier = 1;
     private PotOGoldDecoration myDeco;
 
-    public bool upgrading = false;
-    public bool completed = false;
-    [SerializeField] private float upgradeTimer = 0f;
+    [SerializeField] private UpgradeMethod upgradeMethod = UpgradeMethod.noMethod;
+
+
     public void DestroyDecoration()
     {
         Destroy(this.gameObject);
@@ -37,32 +37,22 @@ public class PotOGoldHandler : MonoBehaviour, iDecoration
     void Start()
     {
         //Debug.Log("Deco Type: " + myDeco.MyDecorationType.ToString() + "  Deco Points: " + myDeco.GetPoints().ToString());
-        upgrading = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (upgrading)
-        {
-            upgradeTimer += Time.deltaTime;
-
-
-            if (upgradeTimer >= 15f)
-            {
-                upgradeTimer = 15f;
-                completed = true;
-            }
-        }
+        myDeco.Upgrade(upgradeMethod);
     }
-
     public void SetUpgrading(bool state)
     {
-        upgrading = state;
+
+        myDeco.Upgrading = true;
     }
 
     public bool GetUpgradeComplete()
     {
-        return completed;
+        return myDeco.Completed;
     }
 }
