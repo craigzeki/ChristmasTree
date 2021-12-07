@@ -13,7 +13,7 @@ public class ItemCentre : MonoBehaviour
             {
                 Debug.Log("Placed object");
                 other.gameObject.transform.position = transform.GetChild(0).position;
-                other.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                //other.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 

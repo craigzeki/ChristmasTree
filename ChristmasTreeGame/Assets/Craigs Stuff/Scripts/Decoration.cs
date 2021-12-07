@@ -13,6 +13,8 @@ public enum DecorationType : int
     Pot,
     PotOGold,
     PotOMoltenGold,
+    RawRibbon, 
+    Ribbon,
     //New decorations here
     NumOfDecorations
 }
