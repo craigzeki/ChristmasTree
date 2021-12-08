@@ -29,11 +29,19 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
 
     private Decoration myDeco = new Decoration(DecorationType.Pot, 0, UpgradeMethod.NoMethod);
 
+    GameObject progressBar;
+    [SerializeField] GameObject progressBarPrefab;
+    [SerializeField] GameObject barTag;
+    GameObject canvas;
+
+    [SerializeField] bool needsProgressBar = false;
+
     public void Awake()
     {
         decoBackup = decoExpected;
         UpdatePot();
-        
+        canvas = GameObject.Find("InGameCanvas");
+
     }
 
     private void UpdatePot()
@@ -44,6 +52,12 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
                 myDeco.MyDecorationType = DecorationType.Pot;
                 myDeco.MyUpgradeMethod = UpgradeMethod.NoMethod;
                 decoExpected = decoBackup;
+                needsProgressBar = false;
+                if(progressBar != null)
+                {
+                    Destroy(progressBar);
+                    progressBar = null;
+                }
                 visualForState[(int)PotState.Empty].SetActive(true);
                 visualForState[(int)PotState.PotOGold].SetActive(false);
                 visualForState[(int)PotState.PotOMoltenGold].SetActive(false);
@@ -52,6 +66,12 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
                 myDeco.MyDecorationType = DecorationType.PotOGold;
                 myDeco.MyUpgradeMethod = UpgradeMethod.TimeBased;
                 decoExpected = DecorationType.NumOfDecorations;
+                needsProgressBar = true;
+                if (progressBar != null)
+                {
+                    Destroy(progressBar);
+                    progressBar = null;
+                }
                 visualForState[(int)PotState.Empty].SetActive(true);
                 visualForState[(int)PotState.PotOGold].SetActive(true);
                 visualForState[(int)PotState.PotOMoltenGold].SetActive(false);
@@ -60,6 +80,12 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
                 myDeco.MyDecorationType = DecorationType.PotOMoltenGold;
                 myDeco.MyUpgradeMethod = UpgradeMethod.RemoveFrom;
                 decoExpected = DecorationType.NumOfDecorations;
+                needsProgressBar = false;
+                if (progressBar != null)
+                {
+                    Destroy(progressBar);
+                    progressBar = null;
+                }
                 visualForState[(int)PotState.Empty].SetActive(true);
                 visualForState[(int)PotState.PotOGold].SetActive(false);
                 visualForState[(int)PotState.PotOMoltenGold].SetActive(true);
@@ -69,6 +95,7 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
             default:
                 break;
         }
+        
     }
 
     public bool GetPlayerInArea()
@@ -166,6 +193,16 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
     public void Update()
     {
         myDeco.Upgrade(myDeco.MyUpgradeMethod);
+        if (progressBar != null && needsProgressBar)
+        {
+            progressBar.transform.position = Camera.main.WorldToScreenPoint(barTag.transform.position);
+            progressBar.GetComponent<ProgressBar>().CurrentStatus((int)(myDeco.Progress));
+            if (myDeco.Progress == 100)
+            {
+                Destroy(progressBar);
+                progressBar = null;
+            }
+        }
     }
 
     public void UpgradeComplete()
@@ -187,9 +224,21 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
         
     }
 
+ 
+
     public void SetUpgrading(bool state)
     {
-        myDeco.Upgrading = true;
+
+        if (state)
+        {
+            if (progressBarPrefab != null && progressBar == null && needsProgressBar)
+            {
+                progressBar = (GameObject)Instantiate(progressBarPrefab, barTag.transform.localPosition, Quaternion.Euler(barTag.transform.localEulerAngles), canvas.transform);
+                //progressBar.GetComponent<ProgressBar>().CurrentStatus(Mathf.RoundToInt(myDeco.Progress));
+                progressBar.GetComponent<ProgressBar>().CurrentStatus((int)(myDeco.Progress));
+            }
+        }
+        myDeco.Upgrading = state;
     }
 
     public bool GetUpgradeComplete()

@@ -98,6 +98,10 @@ public class StationTriggerAreaTest : MonoBehaviour
                 CompleteMobileStation(other.gameObject);
 
             }
+            else
+            {
+                other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(true);
+            }
         }
 
         /*

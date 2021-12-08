@@ -10,6 +10,13 @@ public class MoltenStarHandler : MonoBehaviour, iDecoration
 
     [SerializeField] private UpgradeMethod upgradeMethod = UpgradeMethod.NoMethod;
 
+    GameObject progressBar;
+    [SerializeField] GameObject progressBarPrefab;
+    [SerializeField] GameObject barTag;
+    GameObject canvas;
+
+    [SerializeField] bool needsProgressBar = false;
+
     public void DestroyDecoration()
     {
         Destroy(this.gameObject);
@@ -64,6 +71,15 @@ public class MoltenStarHandler : MonoBehaviour, iDecoration
 
     public void SetUpgrading(bool state)
     {
+        if (state)
+        {
+            if (progressBarPrefab != null && progressBar == null && needsProgressBar)
+            {
+                progressBar = (GameObject)Instantiate(progressBarPrefab, barTag.transform.localPosition, Quaternion.Euler(barTag.transform.localEulerAngles), canvas.transform);
+                //progressBar.GetComponent<ProgressBar>().CurrentStatus(Mathf.RoundToInt(myDeco.Progress));
+                progressBar.GetComponent<ProgressBar>().CurrentStatus((int)(myDeco.Progress));
+            }
+        }
         myDeco.Upgrading = state;
     }
 
@@ -76,12 +92,21 @@ public class MoltenStarHandler : MonoBehaviour, iDecoration
     void Start()
     {
         //Debug.Log("Deco Type: " + myDeco.MyDecorationType.ToString() + "  Deco Points: " + myDeco.GetPoints().ToString());
-
+        canvas = GameObject.Find("InGameCanvas");
     }
 
     // Update is called once per frame
     void Update()
     {
         myDeco.Upgrade(upgradeMethod);
+        if (progressBar != null && needsProgressBar)
+        {
+            progressBar.transform.position = Camera.main.WorldToScreenPoint(barTag.transform.position);
+            progressBar.GetComponent<ProgressBar>().CurrentStatus((int)(myDeco.Progress));
+            if (myDeco.Progress == 100)
+            {
+                Destroy(progressBar);
+            }
+        }
     }
 }
