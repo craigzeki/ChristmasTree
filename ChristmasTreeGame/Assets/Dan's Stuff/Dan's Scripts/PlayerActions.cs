@@ -33,6 +33,7 @@ public class PlayerActions : MonoBehaviour
         {
             currentTime = 0f;
             GrabObject();
+            
         }
 
         if(objectsInHand.Count > 0)
@@ -50,6 +51,7 @@ public class PlayerActions : MonoBehaviour
     public virtual void GrabObject()
     {
         LayerMask objectMask = LayerMask.GetMask("Objects");
+        Debug.Log("Player grabbing object");
 
         Collider[] objectsHit = Physics.OverlapSphere(point.position, range, objectMask);
 
@@ -60,7 +62,7 @@ public class PlayerActions : MonoBehaviour
 
             Transform currentObjectScale = objects.gameObject.transform;
 
-            if (this.transform.childCount < 2 && !item.isBeingHeld)
+            if (this.transform.childCount < 3 && !item.isBeingHeld)
             {
 
                 objects.gameObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -78,7 +80,7 @@ public class PlayerActions : MonoBehaviour
 
 
             }
-            else if (this.transform.childCount >= 2)
+            else if (this.transform.childCount >= 3)
             {
 
                 objects.gameObject.GetComponent<Rigidbody>().isKinematic = false;
@@ -96,6 +98,6 @@ public class PlayerActions : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawWireSphere(point.position, range);
+        Gizmos.DrawWireSphere(point.position, range);
     }
 }

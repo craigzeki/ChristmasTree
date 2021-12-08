@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControls",
+    "name": "PlayerControls 2",
     "maps": [
         {
             "name": "Player",
@@ -25,6 +25,14 @@
                     "name": "Interaction",
                     "type": "Button",
                     "id": "48df68fd-3392-44b5-ab6c-334ab2cfd7f7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "c1616f3b-79b2-43fe-84a2-d4971a5bbdfc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -138,6 +146,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "762ec4cf-a0e4-4f4e-ae33-72b4e058c431",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a28c9f07-1dba-4b4e-b24c-ab3e4a0dbf44",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

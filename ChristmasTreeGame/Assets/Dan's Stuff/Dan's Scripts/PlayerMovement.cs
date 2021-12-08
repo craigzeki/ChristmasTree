@@ -43,6 +43,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        /*
+        if (GameSystem.Instance.CurrentGameState == GameSystem.GameStates.GamePlay)
+        {
+
+        }
+        */
+
+
         //movementInput = value;
         movementInput = context.ReadValue<Vector2>();
         movementInput = Vector2.SmoothDamp(movementInput, currentInputVector, ref smoothInputVelocity, smoothInputSpeed);
@@ -50,19 +58,42 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        /*
+        if (GameSystem.Instance.CurrentGameState == GameSystem.GameStates.GamePlay)
+        {
+
+        }
+        */
         jumped = context.action.triggered;
     }
 
     public void OnGrab(InputAction.CallbackContext context)
     {
-        
+        /*
+        if (GameSystem.Instance.CurrentGameState == GameSystem.GameStates.GamePlay)
+        {
+
+        }
+        */
         grabedObject = context.action.triggered;
 
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+        /*
+        if (GameSystem.Instance.CurrentGameState == GameSystem.GameStates.GamePlay)
+        {
+
+        }
+        */
         interactPressed = context.action.triggered;
+
+    }
+
+    public void OnStart(InputAction.CallbackContext context)
+    {
+        
     }
 
 
