@@ -223,6 +223,7 @@ MonoBehaviour:
   progressBarPrefab: {fileID: 779504915317637872, guid: dd05e6a07e053314f8301b25d0ff97ce, type: 3}
   barTag: {fileID: 3231087047878349722}
   needsProgressBar: 0
+  particlePrefab: {fileID: 2337835501191585047, guid: 1e253e68cc16f734ca354dc5e1ee2e89, type: 3}
 --- !u!1 &8649255184120921504
 GameObject:
   m_ObjectHideFlags: 0

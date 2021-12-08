@@ -36,6 +36,9 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
 
     [SerializeField] bool needsProgressBar = false;
 
+    [SerializeField] private GameObject particlePrefab;
+    private GameObject particles;
+
     public void Awake()
     {
         decoBackup = decoExpected;
@@ -183,6 +186,7 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
                 other.gameObject.GetComponent<iDecoration>().SetUpgrading(false);
                 //GameEvents.current.StationHolderTriggerExit(id);
             }
+            StartCoroutine(StopParticles());
         }
 
 
@@ -211,6 +215,7 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
         {
             potState = PotState.Empty;
         }
+        particles = (GameObject)Instantiate(particlePrefab, this.gameObject.transform.position, Quaternion.Euler(0f,0f,0f));
         UpdatePot();
     }
 
@@ -239,6 +244,12 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
             }
         }
         myDeco.Upgrading = state;
+    }
+
+    private IEnumerator StopParticles()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(particles);
     }
 
     public bool GetUpgradeComplete()
