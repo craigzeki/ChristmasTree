@@ -22,6 +22,10 @@ public class StationTriggerAreaTest : MonoBehaviour
 
     [SerializeField] private GameObject particlePrefab;
     private GameObject particles;
+
+    private AudioSource audioSource;
+    [SerializeField] private bool needsAudio = false;
+
     public void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Decoration")
@@ -33,8 +37,11 @@ public class StationTriggerAreaTest : MonoBehaviour
 
                 tempCollider = other;
 
+                if(audioSource != null)
+                {
+                    audioSource.Play();
+                }
                 
-
 
                 //Call the event from game events 
                 //GameEvents.current.StationHolderTriggerEnter(id);
@@ -146,7 +153,7 @@ public class StationTriggerAreaTest : MonoBehaviour
         if (isComplete)
         {
             GameObject tempCompleteItem = (GameObject)Instantiate(completeItem, this.gameObject.transform.parent.transform.position, this.gameObject.transform.parent.transform.rotation);
-            particles = (GameObject)Instantiate(particlePrefab, tempCompleteItem.transform.position, tempCompleteItem.transform.rotation);
+            particles = (GameObject)Instantiate(particlePrefab, tempCompleteItem.transform.position, Quaternion.Euler(0, 0, 0));
             
             isComplete = false;
         }
@@ -172,6 +179,11 @@ public class StationTriggerAreaTest : MonoBehaviour
 
                 //GameEvents.current.StationHolderTriggerExit(id);
             }
+            if(audioSource != null)
+            {
+                audioSource.Stop();
+            }
+            
             StartCoroutine(StopParticles());
         }
         
@@ -183,5 +195,10 @@ public class StationTriggerAreaTest : MonoBehaviour
     private void Start()
     {
         backupDecoType = decoExpected;
+        if (needsAudio)
+        {
+            audioSource = gameObject.GetComponent<AudioSource>();
+        }
+        
     }
 }

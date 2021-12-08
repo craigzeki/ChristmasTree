@@ -16,6 +16,8 @@ public class OrderHandler : MonoBehaviour
     private Bounds myBounds;
     private GameObject myTree;
 
+    private AudioSource audioSource;
+
     public ChristmasTreeOrder MyOrder { get => myOrder;  set => myOrder = value; }
     public int MyOrderIndex { get => myOrderIndex; }
 
@@ -40,6 +42,7 @@ public class OrderHandler : MonoBehaviour
     {
         myCloud = GetComponentInChildren<CloudHandler>();
         myCloud.AddDecorations(myOrder.DecorationsRequired);
+        audioSource = gameObject.GetComponent<AudioSource>();
 
         RefreshBounds();
     }
@@ -113,6 +116,7 @@ public class OrderHandler : MonoBehaviour
                 {
                     // decoration placed
                     // play placed sound
+                    audioSource.Play();
                     // tell the decoration to destroy itself
                     myTree.GetComponent<TreeHandler>().PlaceDecoration(other.gameObject);
                     //theDecoration.DestroyDecoration();
