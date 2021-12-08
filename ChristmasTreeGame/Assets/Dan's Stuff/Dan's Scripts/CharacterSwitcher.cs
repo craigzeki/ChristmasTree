@@ -38,26 +38,12 @@ public class CharacterSwitcher : MonoBehaviour
         {
             index++;
         }
-        
+
         manager.playerPrefab = characters[index];
         
 
-        /*
-        if (manager.playerPrefab.GetComponentInChildren<PlayerInput>().actions == null)
-        {
-            //playerInputNew = manager.playerPrefab.GetComponentInChildren<PlayerInput>();
-            manager.playerPrefab.AddComponent<PlayerInput>().actions = inputActions;
-        }
-        */
-
-        /*
-        if (manager.playerPrefab.GetComponentInChildren<PlayerInput>().actions == null)
-        {
-            Debug.Log("Player has an action component");
-            manager.playerPrefab.GetComponentInChildren<PlayerInput>().actions = inputActions;
-        }
-        */
     }
+
 
     private void Update()
     {

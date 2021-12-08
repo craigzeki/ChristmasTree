@@ -2196,6 +2196,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4115516088175863823, guid: 706fbd39d52980f41b6fbc128475cec4, type: 3}
+      propertyPath: spawnpoint
+      value: 
+      objectReference: {fileID: 605665046}
+    - target: {fileID: 4115516088175863823, guid: 706fbd39d52980f41b6fbc128475cec4, type: 3}
       propertyPath: characters.Array.size
       value: 6
       objectReference: {fileID: 0}
