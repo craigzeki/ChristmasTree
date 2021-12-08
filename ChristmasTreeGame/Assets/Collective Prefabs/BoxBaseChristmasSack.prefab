@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824991d89d04ff44a92d6d29f26038b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 4
   itemPrefab: {fileID: 24137210939633831, guid: 4f8723e906dbb994fbf2030778772917, type: 3}
 --- !u!1 &7174713011200322735
 GameObject:
@@ -202,5 +202,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fbe02d8b10e2b94bb31362808f027ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 4
   canSpawn: 1

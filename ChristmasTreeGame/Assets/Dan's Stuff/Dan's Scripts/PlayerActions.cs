@@ -66,10 +66,10 @@ public class PlayerActions : MonoBehaviour
                 objects.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
                 objects.transform.localScale = currentObjectScale.localScale;
-                objects.transform.localRotation = currentObjectScale.rotation;
+                //objects.transform.localRotation = currentObjectScale.rotation;
 
                 //objects.transform.localScale = new Vector3(1, 1, 1);
-                //objects.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                objects.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
                 objects.transform.parent = gameObject.transform;
                 objects.transform.position = point.transform.position;

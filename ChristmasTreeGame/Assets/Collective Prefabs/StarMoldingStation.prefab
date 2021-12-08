@@ -165,6 +165,7 @@ MonoBehaviour:
   interactableStationObject: {fileID: 4214989546493153000, guid: deedb91ad858c7245a7b4ee7ef58050e, type: 3}
   interactableObjectLocationTag: {fileID: 5353137383240919998}
   objectOnStation: 0
+  particlePrefab: {fileID: 2337835501191585047, guid: 1e253e68cc16f734ca354dc5e1ee2e89, type: 3}
 --- !u!1 &5353137383240919998
 GameObject:
   m_ObjectHideFlags: 0

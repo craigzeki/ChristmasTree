@@ -19,6 +19,9 @@ public class StationTriggerAreaTest : MonoBehaviour
     private bool isComplete = false;
 
     public bool objectOnStation = false;
+
+    [SerializeField] private GameObject particlePrefab;
+    private GameObject particles;
     public void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Decoration")
@@ -143,8 +146,16 @@ public class StationTriggerAreaTest : MonoBehaviour
         if (isComplete)
         {
             GameObject tempCompleteItem = (GameObject)Instantiate(completeItem, this.gameObject.transform.parent.transform.position, this.gameObject.transform.parent.transform.rotation);
+            particles = (GameObject)Instantiate(particlePrefab, tempCompleteItem.transform.position, tempCompleteItem.transform.rotation);
+            
             isComplete = false;
         }
+    }
+
+    private IEnumerator StopParticles()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(particles);
     }
 
     public void OnTriggerExit(Collider other)
@@ -155,9 +166,13 @@ public class StationTriggerAreaTest : MonoBehaviour
             if (other.gameObject.GetComponentInChildren<iDecoration>().GetDecoration().MyDecorationType == decoExpected && other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
             {
                 objectOnStation = false;
+                
+                
                 other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(false);
+
                 //GameEvents.current.StationHolderTriggerExit(id);
             }
+            StartCoroutine(StopParticles());
         }
         
         

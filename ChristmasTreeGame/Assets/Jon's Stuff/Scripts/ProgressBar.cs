@@ -23,7 +23,7 @@ public class ProgressBar : MonoBehaviour
         {
             
         }
-        Debug.Log(progress.ToString() + "Progress bar");
+
         fill.color = grad.Evaluate(slider.normalizedValue);
     }
 }

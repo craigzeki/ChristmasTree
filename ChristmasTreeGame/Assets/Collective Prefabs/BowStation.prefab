@@ -258,7 +258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   decoExpected: 11
-  completeItem: {fileID: 1613777359082422134, guid: dd4eb545ca445484f99e3498defa4547, type: 3}
+  completeItem: {fileID: 1273798944055965197, guid: 7433080fd3668aa479d1aaa355966ce9, type: 3}
   interactableStationObject: {fileID: 0}
   interactableObjectLocationTag: {fileID: 0}
   objectOnStation: 0
+  particlePrefab: {fileID: 2337835501191585047, guid: 1e253e68cc16f734ca354dc5e1ee2e89, type: 3}
