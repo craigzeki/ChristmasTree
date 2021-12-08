@@ -22,15 +22,18 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
 
     [SerializeField] private PotState potState = PotState.Empty;
 
-    private bool isComplete = false;
+    //private bool isComplete = false;
 
     public bool objectOnStation = false;
+    private DecorationType decoBackup;
 
     private Decoration myDeco = new Decoration(DecorationType.Pot, 0, UpgradeMethod.NoMethod);
 
     public void Awake()
     {
+        decoBackup = decoExpected;
         UpdatePot();
+        
     }
 
     private void UpdatePot()
@@ -40,6 +43,7 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
             case PotState.Empty:
                 myDeco.MyDecorationType = DecorationType.Pot;
                 myDeco.MyUpgradeMethod = UpgradeMethod.NoMethod;
+                decoExpected = decoBackup;
                 visualForState[(int)PotState.Empty].SetActive(true);
                 visualForState[(int)PotState.PotOGold].SetActive(false);
                 visualForState[(int)PotState.PotOMoltenGold].SetActive(false);
@@ -47,6 +51,7 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
             case PotState.PotOGold:
                 myDeco.MyDecorationType = DecorationType.PotOGold;
                 myDeco.MyUpgradeMethod = UpgradeMethod.TimeBased;
+                decoExpected = DecorationType.NumOfDecorations;
                 visualForState[(int)PotState.Empty].SetActive(true);
                 visualForState[(int)PotState.PotOGold].SetActive(true);
                 visualForState[(int)PotState.PotOMoltenGold].SetActive(false);
@@ -54,6 +59,7 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
             case PotState.PotOMoltenGold:
                 myDeco.MyDecorationType = DecorationType.PotOMoltenGold;
                 myDeco.MyUpgradeMethod = UpgradeMethod.RemoveFrom;
+                decoExpected = DecorationType.NumOfDecorations;
                 visualForState[(int)PotState.Empty].SetActive(true);
                 visualForState[(int)PotState.PotOGold].SetActive(false);
                 visualForState[(int)PotState.PotOMoltenGold].SetActive(true);
@@ -117,7 +123,7 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
                 {
                     other.gameObject.GetComponent<iDecoration>().DestroyDecoration();
 
-                    isComplete = true;
+                    //isComplete = true;
 
                     UpgradeComplete();
                 }
@@ -125,7 +131,7 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
                 {
                     other.gameObject.GetComponent<iDecoration>().DestroyDecoration();
 
-                    isComplete = true;
+                    //isComplete = true;
                     UpgradeComplete();
                 }
 

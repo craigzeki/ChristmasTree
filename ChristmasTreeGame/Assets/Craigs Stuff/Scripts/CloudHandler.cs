@@ -62,4 +62,9 @@ public class CloudHandler : MonoBehaviour
         }
         
     }
+
+    private void OnDestroy()
+    {
+        Destroy(myCloud);
+    }
 }
