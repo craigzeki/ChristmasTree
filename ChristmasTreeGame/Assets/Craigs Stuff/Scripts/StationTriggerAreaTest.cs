@@ -57,7 +57,10 @@ public class StationTriggerAreaTest : MonoBehaviour
                 tempCollider = other;
 
 
-
+                if (audioSource != null)
+                {
+                    audioSource.Play();
+                }
 
                 //Call the event from game events 
                 //GameEvents.current.StationHolderTriggerEnter(id);

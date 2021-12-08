@@ -39,16 +39,27 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
     [SerializeField] private GameObject particlePrefab;
     private GameObject particles;
 
+    private AudioSource audioSource;
+    [SerializeField] private bool needsAudio = false;
+
     public void Awake()
     {
         decoBackup = decoExpected;
         UpdatePot();
         canvas = GameObject.Find("InGameCanvas");
+        if (needsAudio)
+        {
+            audioSource = gameObject.GetComponent<AudioSource>();
+        }
 
     }
 
     private void UpdatePot()
     {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
         switch (potState)
         {
             case PotState.Empty:
@@ -186,6 +197,7 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
                 other.gameObject.GetComponent<iDecoration>().SetUpgrading(false);
                 //GameEvents.current.StationHolderTriggerExit(id);
             }
+            
             StartCoroutine(StopParticles());
         }
 
