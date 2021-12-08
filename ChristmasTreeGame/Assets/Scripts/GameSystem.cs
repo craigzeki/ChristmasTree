@@ -66,11 +66,11 @@ public class GameSystem : MonoBehaviour
     {
         levelCompleteCanvas.enabled = false;
         pauseCanvas.enabled = false;
-        inPlayCanvas.enabled = true;
-        menuCanvas.enabled = false;
+        inPlayCanvas.enabled = false;
+        menuCanvas.enabled = true;
         currentGameState = GameStates.Menu;
         newGameState = currentGameState;
-        CameraDirector.Instance.SetCamera(CameraDirector.CameraList.InPlayCam);
+        CameraDirector.Instance.SetCamera(CameraDirector.CameraList.MenuCam);
         //playerAnimator = player.GetComponent<Animator>();
     }
 
@@ -89,17 +89,19 @@ public class GameSystem : MonoBehaviour
             case GameStates.Menu:                
                 if(startButtonPressed && !startButtonLatched)
                 {
+                    Debug.Log("Start recognised");
                     startButtonLatched = true;
-                    StartCoroutine(FadeCanvas(menuCanvas));
+                    //StartCoroutine(FadeCanvas(menuCanvas));
                     //set next camera position to blend to
                     CameraDirector.Instance.SetCamera(CameraDirector.CameraList.InPlayCam);
                 }
-                if(startButtonLatched && menuCanvas.GetComponent<CanvasGroup>().alpha == 0)
+                //if(startButtonLatched && menuCanvas.GetComponent<CanvasGroup>().alpha == 0)
                 {
                     //CameraDirector.Instance.SetCamera(CameraDirector.CameraList.FollowCam);
                 }
                 if(startButtonLatched && !CameraDirector.Instance.GetIsLive(CameraDirector.CameraList.MenuCam))
                 {
+                    Debug.Log("Start recognised 2");
                     startButtonPressed = false;
                     startButtonLatched = false;
                     NewGameState = GameStates.GamePlay;
@@ -112,6 +114,7 @@ public class GameSystem : MonoBehaviour
                     GameSystemController.Instance.winGame();
                 }
                 */
+                //To Do - Add order manager Start
                 break;
             case GameStates.GamePause:
                 break;
@@ -137,6 +140,7 @@ public class GameSystem : MonoBehaviour
                 {
                     
                     inPlayCanvas.enabled = true;
+                    menuCanvas.enabled = false;
 
                     //complete the transition
                     currentGameState = NewGameState;
@@ -156,6 +160,7 @@ public class GameSystem : MonoBehaviour
                     //Set camera to new level complete cam 
                     CameraDirector.Instance.SetCamera(CameraDirector.CameraList.LevelCompleteCam);
                     levelCompleteCanvas.enabled = true;
+                    inPlayCanvas.enabled = false;
                     //player win animation?
                     //playerAnimator.SetBool("winGame", true);
                     currentGameState = NewGameState;
@@ -240,6 +245,7 @@ public class GameSystem : MonoBehaviour
 
     public void StartButtonPressed()
     {
+        Debug.Log("Start pressed");
 
         switch (currentGameState)
         {
