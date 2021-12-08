@@ -35,13 +35,19 @@ public class Decoration
     public bool Completed { get => completed; }
     public UpgradeMethod MyUpgradeMethod
     {
-        get => myUpgradeMethod; set
+        get => myUpgradeMethod;
+        set
         {
             myUpgradeMethod = value;
             completed = false;
             upgradeTimer = 0;
+            progress = 0f;
         }
     }
+
+    public bool PlayerInArea { get => playerInArea; set => playerInArea = value; }
+    public Collider Collider { get => collider; set => collider = value; }
+    public float Progress { get => progress; set => progress = value; }
 
     private UpgradeMethod myUpgradeMethod;
 
@@ -64,8 +70,17 @@ public class Decoration
     private bool upgrading = false;
     private bool completed = false;
     private float upgradeTimer = 0f;
+    private float upgradeCompleteTime = 15f;
 
+    private float tempTime = 0f;
+    private int health = 0;
+    private int hitAmount = 10;
 
+    private float progress = 0f;
+    
+
+    private bool playerInArea;
+    private Collider collider;
 
     public void Upgrade(UpgradeMethod upgradeMethod)
     {
@@ -77,6 +92,7 @@ public class Decoration
                     TimeUpgrade();
                     break;
                 case UpgradeMethod.ButtonMash:
+                    ButtonUpgrade();
                     break;
                 
                 case UpgradeMethod.NoMethod:
@@ -98,21 +114,51 @@ public class Decoration
     {
         upgradeTimer += Time.deltaTime;
 
-
-        if (upgradeTimer >= 15f)
+        progress = (upgradeTimer / upgradeCompleteTime) * 100;
+        if(progress > 100)
         {
-            upgradeTimer = 15f;
+            progress = 100;
+        }
+        if (upgradeTimer >= upgradeCompleteTime)
+        {
+            upgradeTimer = upgradeCompleteTime;
             completed = true;
         }
+    }
+    
+    private void ButtonUpgrade()
+    {
+        tempTime += Time.deltaTime;
+
+        if(playerInArea && collider != null)
+        {
+            if (tempTime > 0.2f && collider.gameObject.GetComponent<PlayerMovement>().interactPressed)
+            {
+                tempTime = 0f;
+                health++;
+                Debug.Log("Ribbon Upgrading");
+                progress = (health / hitAmount) * 100;
+                if (health >= hitAmount)
+                {
+                    completed = true;
+                    Debug.Log("Ribbon complete");
+                }
+
+
+            }
+        }
+        
     }
 
     private void SimpleAddItemsTogether()
     {
         completed = true;
+        progress = 100;
     }
 
     private void SimpleRemoveFrom()
     {
         completed = true;
+        progress = 100;
     }
 }

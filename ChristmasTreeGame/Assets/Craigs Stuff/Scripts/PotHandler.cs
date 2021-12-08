@@ -65,6 +65,31 @@ public class PotHandler : MonoBehaviour, iMobileStation, iDecoration
         }
     }
 
+    public bool GetPlayerInArea()
+    {
+
+        return myDeco.PlayerInArea;
+    }
+
+    public void SetPlayerInArea(bool player)
+    {
+        myDeco.PlayerInArea = player;
+
+    }
+    public Collider GetPlayerCollider()
+    {
+        return myDeco.Collider;
+    }
+    public float GetUpgradeProgress()
+    {
+        return myDeco.Progress;
+    }
+
+    public void SetPlayerCollider(Collider collider)
+    {
+        myDeco.Collider = collider;
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Decoration")

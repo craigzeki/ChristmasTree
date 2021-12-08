@@ -5,16 +5,28 @@ using UnityEngine;
 public class PlayerTriggerArea : MonoBehaviour
 {
     public int id;
-
+    iDecoration decoration;
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            bool isInteracting = other.gameObject.GetComponent<PlayerMovement>().interactPressed;
-            if (isInteracting)
+            iDecoration tempDecoration = other.gameObject.GetComponentInChildren<iDecoration>();
+          
+            if (tempDecoration != null)
             {
-                Debug.Log("Player interacting with station");
+                decoration = tempDecoration;
+                decoration.SetPlayerInArea(true);
+                decoration.SetPlayerCollider(other);
             }
+            if(decoration != null)
+            {
+                decoration.SetPlayerInArea(true);
+                decoration.SetPlayerCollider(other);
+            }
+
+            //TO DO
+            //Set decoration back to null when the decoration interaction is finished
+
             //GameEvents.current.StationHolderTriggerEnter(id);
         }
     }
@@ -23,9 +35,26 @@ public class PlayerTriggerArea : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            //GameEvents.current.StationHolderTriggerExit(id);
+
+
+            if (decoration != null)
+            {
+                decoration.SetPlayerInArea(false);
+                decoration.SetPlayerCollider(null);
+            }
         }
         
+        
+    }
+
+    private void Update()
+    {
+
+        if (decoration != null)
+        {
+
+            Debug.Log("Decoration here" + decoration.GetPlayerInArea().ToString());
+        }
         
     }
 }

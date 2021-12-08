@@ -15,6 +15,31 @@ public class GoldHandler : MonoBehaviour, iDecoration
         Destroy(this.gameObject);
     }
 
+    public bool GetPlayerInArea()
+    {
+
+        return myDeco.PlayerInArea;
+    }
+
+    public void SetPlayerInArea(bool player)
+    {
+        myDeco.PlayerInArea = player;
+
+    }
+    public Collider GetPlayerCollider()
+    {
+        return myDeco.Collider;
+    }
+
+    public void SetPlayerCollider(Collider collider)
+    {
+        myDeco.Collider = collider;
+    }
+    public float GetUpgradeProgress()
+    {
+        return myDeco.Progress;
+    }
+
     public Decoration GetDecoration()
     {
         if (myDeco != null)

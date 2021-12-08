@@ -15,6 +15,19 @@ public class BaubleHandler : MonoBehaviour, iDecoration
         Destroy(this.gameObject);
     }
 
+
+    public bool GetPlayerInArea()
+    {
+
+        return myDeco.PlayerInArea;
+    }
+
+    public void SetPlayerInArea(bool player)
+    {
+        myDeco.PlayerInArea = player;
+
+    }
+
     public Decoration GetDecoration()
     {
         if (myDeco != null)
@@ -37,6 +50,8 @@ public class BaubleHandler : MonoBehaviour, iDecoration
         return myDeco.MyUpgradeMethod;
     }
 
+
+
     public void SetUpgrading(bool state)
     {
         throw new System.NotImplementedException();
@@ -58,5 +73,20 @@ public class BaubleHandler : MonoBehaviour, iDecoration
     void Update()
     {
         myDeco.Upgrade(upgradeMethod);
+    }
+
+    public Collider GetPlayerCollider()
+    {
+        return myDeco.Collider;
+    }
+
+    public void SetPlayerCollider(Collider collider)
+    {
+        myDeco.Collider = collider;
+    }
+
+    public float GetUpgradeProgress()
+    {
+        return myDeco.Progress;
     }
 }

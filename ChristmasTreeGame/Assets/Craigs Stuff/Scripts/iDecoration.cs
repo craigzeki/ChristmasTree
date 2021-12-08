@@ -12,4 +12,14 @@ public interface iDecoration
     bool GetUpgradeComplete();
 
     UpgradeMethod GetUpgradeMethod();
+
+    bool GetPlayerInArea();
+
+    void SetPlayerInArea(bool player);
+
+    Collider GetPlayerCollider();
+
+    void SetPlayerCollider(Collider collider);
+
+    float GetUpgradeProgress();
 }

@@ -6,7 +6,7 @@ public class RawRibbonHandler : MonoBehaviour, iDecoration
 {
     [SerializeField] private int points = 10;
     [SerializeField] private int multiplier = 1;
-    private RibbonDecoration myDeco;
+    private RawRibbonDecoration myDeco;
 
     [SerializeField] private UpgradeMethod upgradeMethod;
 
@@ -15,6 +15,31 @@ public class RawRibbonHandler : MonoBehaviour, iDecoration
     public void DestroyDecoration()
     {
         Destroy(this.gameObject);
+    }
+
+    public bool GetPlayerInArea()
+    {
+
+        return myDeco.PlayerInArea;
+    }
+
+    public void SetPlayerInArea(bool player)
+    {
+        myDeco.PlayerInArea = player;
+
+    }
+    public Collider GetPlayerCollider()
+    {
+        return myDeco.Collider;
+    }
+
+    public void SetPlayerCollider(Collider collider)
+    {
+        myDeco.Collider = collider;
+    }
+    public float GetUpgradeProgress()
+    {
+        return myDeco.Progress;
     }
 
     public Decoration GetDecoration()
@@ -31,7 +56,7 @@ public class RawRibbonHandler : MonoBehaviour, iDecoration
 
     private void Awake()
     {
-        myDeco = new RibbonDecoration(points, multiplier, upgradeMethod);
+        myDeco = new RawRibbonDecoration(points, multiplier, upgradeMethod);
     }
 
     // Start is called before the first frame update
