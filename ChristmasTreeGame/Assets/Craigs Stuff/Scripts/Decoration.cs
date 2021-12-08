@@ -137,7 +137,7 @@ public class Decoration
                 tempTime = 0f;
                 health++;
                 Debug.Log("Ribbon Upgrading");
-                progress = (health / hitAmount) * 100;
+                progress = (float)((float)health / (float)hitAmount) * 100;
                 if (health >= hitAmount)
                 {
                     completed = true;

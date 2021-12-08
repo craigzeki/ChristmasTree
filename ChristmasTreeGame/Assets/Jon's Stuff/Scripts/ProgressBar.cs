@@ -19,6 +19,11 @@ public class ProgressBar : MonoBehaviour
     public void CurrentStatus(int progress)
     {
         slider.value = progress;
+        if(progress > 1)
+        {
+            
+        }
+        Debug.Log(progress.ToString() + "Progress bar");
         fill.color = grad.Evaluate(slider.normalizedValue);
     }
 }
