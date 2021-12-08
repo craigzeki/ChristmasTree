@@ -42,7 +42,7 @@ public class BoxLidHandler : MonoBehaviour, iDecoration
 
     public bool GetUpgradeComplete()
     {
-        throw new System.NotImplementedException();
+        return myDeco.Completed;
     }
 
     public UpgradeMethod GetUpgradeMethod()
@@ -54,7 +54,7 @@ public class BoxLidHandler : MonoBehaviour, iDecoration
 
     public void SetUpgrading(bool state)
     {
-        throw new System.NotImplementedException();
+        myDeco.Upgrading = state;
     }
 
     private void Awake()

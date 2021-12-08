@@ -57,12 +57,12 @@ public class BowHandler : MonoBehaviour, iDecoration
     }
     public bool GetUpgradeComplete()
     {
-        throw new System.NotImplementedException();
+        return myDeco.Completed;
     }
 
     public void SetUpgrading(bool state)
     {
-        throw new System.NotImplementedException();
+        myDeco.Upgrading = state;
     }
 
     private void Awake()
