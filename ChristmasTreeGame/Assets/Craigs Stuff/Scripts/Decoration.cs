@@ -16,6 +16,9 @@ public enum DecorationType : int
     MoltenStar,
     RawRibbon, 
     Ribbon,
+    BoxBase,
+    BoxLid,
+    BoxNoRibbon,
     //New decorations here
     NumOfDecorations
 }
