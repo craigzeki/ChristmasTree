@@ -95,12 +95,25 @@ public class StationTriggerAreaTest : MonoBehaviour
 
                 
             }
-            else
+            else if(!other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
             {
                 
                 other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(true);
+                if (audioSource != null && !audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
             }
-            
+            else if (other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
+            {
+
+                other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(false);
+                if (audioSource != null)
+                {
+                    audioSource.Stop();
+                }
+            }
+
         }
         else if (other.tag == "MoveableObject" && other.gameObject.GetComponentInChildren<iDecoration>().GetDecoration().MyDecorationType == decoExpected)
         {
@@ -111,9 +124,21 @@ public class StationTriggerAreaTest : MonoBehaviour
                 CompleteMobileStation(other.gameObject);
 
             }
-            else
+            else if(!other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
             {
                 other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(true);
+                if (audioSource != null && !audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+            }
+            else if (other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
+            {
+                other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(false);
+                if (audioSource != null)
+                {
+                    audioSource.Stop();
+                }
             }
         }
 

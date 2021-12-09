@@ -21,7 +21,7 @@ public class ItemDecoration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        /*
         if(transform.parent != null && transform.parent.parent != null)
         {
             
@@ -31,6 +31,7 @@ public class ItemDecoration : MonoBehaviour
         {
             isBeingHeld = false;
         }
+        */
     }
 
 }

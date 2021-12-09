@@ -83,7 +83,7 @@ public class PlayerActions : MonoBehaviour
 
                 objects.transform.parent = gameObject.transform;
                 objects.transform.position = point.transform.position;
-
+                item.isBeingHeld = true;
                 objectsInHand.Add(objects.gameObject);
 
 
@@ -93,6 +93,7 @@ public class PlayerActions : MonoBehaviour
 
                 objects.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 objects.transform.parent = null;
+                item.isBeingHeld = false;
 
                 objectsInHand.Remove(objects.gameObject);
 
