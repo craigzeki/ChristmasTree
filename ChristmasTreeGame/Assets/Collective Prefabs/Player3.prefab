@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 2683051797622164847}
   - component: {fileID: 3618463414179941731}
   - component: {fileID: 532479619462958994}
+  - component: {fileID: 2457375549381495688}
   m_Layer: 21
   m_Name: Player3
   m_TagString: Player
@@ -313,3 +314,16 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2457375549381495688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6669297726728002845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdc8f01d6eece14bbe7fc100838b12a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnpointName: Player3Spawn

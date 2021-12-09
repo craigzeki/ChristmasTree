@@ -16,6 +16,7 @@ public class ItemDecoration : MonoBehaviour
 
 
     public bool isBeingHeld = false;
+    public bool isOnTree = false;
 
 
     // Update is called once per frame

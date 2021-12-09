@@ -56,6 +56,28 @@ public class PlayerActions : MonoBehaviour
 
     }
 
+    public void releaseObjectToTree(GameObject objectToRelease)
+    {
+        bool release = false;
+        Debug.Log("Called release");
+        foreach(GameObject objectHeld in objectsInHand)
+        {
+            Debug.Log("Searching for object to release");
+            if(objectHeld == objectToRelease)
+            {
+                Debug.Log("Released to Tree");
+                release = true;
+                
+                objectToRelease.GetComponentInChildren<ItemDecoration>().isBeingHeld = false;
+            }
+        }
+        if(release)
+        {
+            objectsInHand.Remove(objectToRelease);
+            objectToRelease.GetComponent<ItemDecoration>().isOnTree = true;
+        }
+    }
+
     public virtual void GrabObject()
     {
         LayerMask objectMask = LayerMask.GetMask("Objects");
@@ -70,7 +92,7 @@ public class PlayerActions : MonoBehaviour
 
             Transform currentObjectScale = objects.gameObject.transform;
 
-            if (this.transform.childCount < 3 && !item.isBeingHeld)
+            if (this.transform.childCount < 3 && !item.isBeingHeld && !item.isOnTree)
             {
 
                 objects.gameObject.GetComponent<Rigidbody>().isKinematic = true;

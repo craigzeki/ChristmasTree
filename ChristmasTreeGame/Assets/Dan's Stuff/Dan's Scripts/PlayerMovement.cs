@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+  
+
     public void OnMove(InputAction.CallbackContext context)
     {
         /*
@@ -93,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnStart(InputAction.CallbackContext context)
     {
-        
+        GameSystem.Instance.StartButtonPressed();
     }
 
 

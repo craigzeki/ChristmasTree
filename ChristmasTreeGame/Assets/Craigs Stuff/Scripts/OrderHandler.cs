@@ -118,7 +118,14 @@ public class OrderHandler : MonoBehaviour
                     // play placed sound
                     audioSource.Play();
                     // tell the decoration to destroy itself
+                    Debug.Log("Parent: " + other.gameObject.transform.parent.ToString());
+                    other.gameObject.GetComponentInParent<PlayerActions>().releaseObjectToTree(other.gameObject);
                     myTree.GetComponent<TreeHandler>().PlaceDecoration(other.gameObject);
+
+                    Debug.Log("Parent: " + other.gameObject.transform.parent.ToString());
+
+
+
                     //theDecoration.DestroyDecoration();
                     Debug.Log("Order Points: " + myOrder.Points.ToString());
                 }

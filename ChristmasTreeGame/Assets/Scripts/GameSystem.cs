@@ -22,6 +22,7 @@ public class GameSystem : MonoBehaviour
     [SerializeField] Canvas inPlayCanvas;
     [SerializeField] Canvas menuCanvas;
     [SerializeField] Canvas levelCompleteCanvas;
+    [SerializeField] OrderManager orderManager;
     //[SerializeField] GameObject player;
     //Animator playerAnimator;
 
@@ -89,8 +90,9 @@ public class GameSystem : MonoBehaviour
             case GameStates.Menu:                
                 if(startButtonPressed && !startButtonLatched)
                 {
-                    Debug.Log("Start recognised");
+                    //Debug.Log("Start recognised");
                     startButtonLatched = true;
+                    menuCanvas.enabled = false;
                     //StartCoroutine(FadeCanvas(menuCanvas));
                     //set next camera position to blend to
                     CameraDirector.Instance.SetCamera(CameraDirector.CameraList.InPlayCam);
@@ -101,7 +103,7 @@ public class GameSystem : MonoBehaviour
                 }
                 if(startButtonLatched && !CameraDirector.Instance.GetIsLive(CameraDirector.CameraList.MenuCam))
                 {
-                    Debug.Log("Start recognised 2");
+                    //Debug.Log("Start recognised 2");
                     startButtonPressed = false;
                     startButtonLatched = false;
                     NewGameState = GameStates.GamePlay;
@@ -138,7 +140,7 @@ public class GameSystem : MonoBehaviour
                 //Check transitions and execute transition actions
                 if (NewGameState == GameStates.GamePlay)
                 {
-                    
+                    orderManager.StartPressed();
                     inPlayCanvas.enabled = true;
                     menuCanvas.enabled = false;
 
@@ -158,12 +160,12 @@ public class GameSystem : MonoBehaviour
                 if (NewGameState == GameStates.LevelComplete)
                 {
                     //Set camera to new level complete cam 
-                    CameraDirector.Instance.SetCamera(CameraDirector.CameraList.LevelCompleteCam);
-                    levelCompleteCanvas.enabled = true;
-                    inPlayCanvas.enabled = false;
+                    //CameraDirector.Instance.SetCamera(CameraDirector.CameraList.LevelCompleteCam);
+                    //levelCompleteCanvas.enabled = true;
+                    //inPlayCanvas.enabled = false;
                     //player win animation?
                     //playerAnimator.SetBool("winGame", true);
-                    currentGameState = NewGameState;
+                    //currentGameState = NewGameState;
                 }
                 else if(NewGameState == GameStates.GamePause)
                 {
@@ -176,6 +178,7 @@ public class GameSystem : MonoBehaviour
                         helper.SendMessage("PauseHelper");
                     }
                     */
+                    orderManager.StartPressed();
                     pauseCanvas.enabled = true;
                     currentGameState = NewGameState;
                 }
@@ -196,6 +199,7 @@ public class GameSystem : MonoBehaviour
                         helper.SendMessage("ResumeHelper");
                     }
                     */
+                    orderManager.StartPressed();
                     pauseCanvas.enabled = false;
                     currentGameState = NewGameState;
                 }
@@ -253,10 +257,10 @@ public class GameSystem : MonoBehaviour
                 startButtonPressed = true;
                 break;
             case GameStates.GamePlay:
-                NewGameState = GameStates.GamePause;
+                //NewGameState = GameStates.GamePause;
                 break;
             case GameStates.GamePause:
-                NewGameState = GameStates.GamePlay;
+                //NewGameState = GameStates.GamePlay;
                 break;
             case GameStates.LevelComplete:
                 //reload the scene

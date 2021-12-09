@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerSpawning : MonoBehaviour
 {
-    [SerializeField] private Transform spawnpoint;
+    private Transform spawnpoint;
+    [SerializeField] string spawnpointName;
 
-    private void Awake()
+    
+
+    void Start()
     {
+        spawnpoint = GameObject.Find(spawnpointName).transform;
         this.gameObject.transform.position = spawnpoint.position;
     }
 }

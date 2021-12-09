@@ -30,6 +30,7 @@ public class OrderManager : MonoBehaviour
     private OrderManagerState currentState = OrderManagerState.NotStarted;
     private OrderManagerState newState = OrderManagerState.NotStarted;
     private int currentOrder = 0;
+    private int ordersDestroyed  = 0;
     private int orderPoints = 0;
     private List<GameObject> ordersToDestroy = new List<GameObject>();
 
@@ -48,28 +49,33 @@ public class OrderManager : MonoBehaviour
     {
         currentState = OrderManagerState.NotStarted;
         newState = OrderManagerState.NotStarted;
+        ordersDestroyed = 0;
 
         List<DecorationType> justStar = new List<DecorationType> { DecorationType.Star };
         List<DecorationType> justGift = new List<DecorationType> { DecorationType.Gift };
         List<DecorationType> starBauble = new List<DecorationType> { DecorationType.Star, DecorationType.Bauble };
+        List<DecorationType> starBaubleGift = new List<DecorationType> { DecorationType.Star, DecorationType.Bauble, DecorationType.Gift };
         List<DecorationType> BowBaubleBaubleStar = new List<DecorationType> { DecorationType.Bow, DecorationType.Bauble, DecorationType.Bauble, DecorationType.Star };
         
         ChristmasTreeOrder order1 = new ChristmasTreeOrder(justStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Small], ChristmasTreeSize.Small);
         ChristmasTreeOrder order2 = new ChristmasTreeOrder(starBauble, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
-        ChristmasTreeOrder order5 = new ChristmasTreeOrder(justGift, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
+        
         ChristmasTreeOrder order3 = new ChristmasTreeOrder(justStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Small], ChristmasTreeSize.Small);
         ChristmasTreeOrder order4 = new ChristmasTreeOrder(BowBaubleBaubleStar, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
+        ChristmasTreeOrder order5 = new ChristmasTreeOrder(justGift, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
+        ChristmasTreeOrder order6 = new ChristmasTreeOrder(starBaubleGift, christmasTreeSpeeds[(int)ChristmasTreeSize.Large], ChristmasTreeSize.Large);
 
-        christmasTreesOrdered = new List<ChristmasTreeOrder> { order1, order5, order2, order3, order4 };
+        christmasTreesOrdered = new List<ChristmasTreeOrder> { order1, order5, order6, order2, order3, order4 };
+        //christmasTreesOrdered = new List<ChristmasTreeOrder> { order1};
 
-        OnSpawnOrder();
+
     }
 
     private void OnStart()
     {
         //debug only
         
-        StartPressed();
+        
         
     }
 
@@ -135,10 +141,22 @@ public class OrderManager : MonoBehaviour
                     sleigh.GetComponent<OrderHandler>().DestroyOrder();
                     //remove from screen tracking list
                     ordersOnScreen.Remove(sleigh);
+                    ordersDestroyed++;
                 }
 
-                // instantiate next order
-                TryCreateOrder();
+
+                if (ordersDestroyed == christmasTreesOrdered.Count)
+                {
+                    //finished game
+                    GameSystem.Instance.NewGameState = GameSystem.GameStates.LevelComplete;
+                    NewState = OrderManagerState.Stopped;
+                }
+                else
+                {
+                    // instantiate next order
+                    TryCreateOrder();
+                }
+                
                 
                 break;
             case OrderManagerState.Paused:
@@ -206,6 +224,10 @@ public class OrderManager : MonoBehaviour
                 }
                 break;
             case OrderManagerState.Stopped:
+                if(currentState == OrderManagerState.Running)
+                {
+                    newState = currentState;
+                }
                 break;
             case OrderManagerState.NumOfStates:
                 //break; break removed to allow flow to default state as both are invalid
@@ -217,13 +239,17 @@ public class OrderManager : MonoBehaviour
 
     private void TryCreateOrder()
     {
+        
+
         if(currentOrder < christmasTreesOrdered.Count)
         {
+            
             if (ordersOnScreen.Count == 0)
             {
                 // instantiate first order
 
                 CreateOrder();
+                
             }
             else if(currentOrder > 0)
             {
@@ -260,7 +286,7 @@ public class OrderManager : MonoBehaviour
                 }
             }
         }
-
+        
     }
 
     private void CreateOrder()
@@ -280,6 +306,7 @@ public class OrderManager : MonoBehaviour
         switch (currentState)
         {
             case OrderManagerState.NotStarted:
+                NewState = OrderManagerState.Running;
                 break;
             case OrderManagerState.Running:
                 NewState = OrderManagerState.Paused;
