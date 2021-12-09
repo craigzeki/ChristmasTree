@@ -159,6 +159,7 @@ MonoBehaviour:
   interactableObjectLocationTag: {fileID: 0}
   objectOnStation: 0
   particlePrefab: {fileID: 2337835501191585047, guid: 1e253e68cc16f734ca354dc5e1ee2e89, type: 3}
+  needsAudio: 0
 --- !u!1 &7284009494486750810
 GameObject:
   m_ObjectHideFlags: 0
