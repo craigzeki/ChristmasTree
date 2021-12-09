@@ -39,6 +39,14 @@ public class PlayerActions : MonoBehaviour
         if(objectsInHand.Count > 0)
         {
             holdingObject = true;
+            foreach(GameObject objectInHand in objectsInHand)
+            {
+                if(objectInHand != null)
+                {
+                    objectInHand.transform.position = point.transform.position;
+                }
+                
+            }    
         }
         else
         {
@@ -98,6 +106,6 @@ public class PlayerActions : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(point.position, range);
+        //Gizmos.DrawWireSphere(point.position, range);
     }
 }
