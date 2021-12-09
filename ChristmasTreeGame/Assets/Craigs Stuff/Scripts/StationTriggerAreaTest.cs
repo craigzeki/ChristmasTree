@@ -26,6 +26,8 @@ public class StationTriggerAreaTest : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private bool needsAudio = false;
 
+    private float progress = 0f;
+
     public void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Decoration")
@@ -34,10 +36,10 @@ public class StationTriggerAreaTest : MonoBehaviour
             {
                 objectOnStation = true;
                 other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(true);
-
+                progress = other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeProgress();
                 tempCollider = other;
 
-                if(audioSource != null)
+                if(audioSource != null && other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeMethod() != UpgradeMethod.ButtonMash)
                 {
                     audioSource.Play();
                 }
@@ -57,7 +59,7 @@ public class StationTriggerAreaTest : MonoBehaviour
                 tempCollider = other;
 
 
-                if (audioSource != null)
+                if (audioSource != null && other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeMethod() != UpgradeMethod.ButtonMash)
                 {
                     audioSource.Play();
                 }
@@ -73,6 +75,7 @@ public class StationTriggerAreaTest : MonoBehaviour
     {
         if(other.tag == "Decoration" && other.gameObject.GetComponentInChildren<iDecoration>().GetDecoration().MyDecorationType == decoExpected)
         {
+
             if(other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeComplete())
             {
                 decoExpected = backupDecoType;
@@ -99,8 +102,13 @@ public class StationTriggerAreaTest : MonoBehaviour
             {
                 
                 other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(true);
-                if (audioSource != null && !audioSource.isPlaying)
+                if (audioSource != null && !audioSource.isPlaying && other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeMethod() != UpgradeMethod.ButtonMash)
                 {
+                    audioSource.Play();
+                }
+                else if(audioSource != null && !audioSource.isPlaying && (progress < other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeProgress()))
+                {
+                    progress = other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeProgress();
                     audioSource.Play();
                 }
             }
@@ -127,8 +135,13 @@ public class StationTriggerAreaTest : MonoBehaviour
             else if(!other.gameObject.GetComponent<ItemDecoration>().isBeingHeld)
             {
                 other.gameObject.GetComponentInChildren<iDecoration>().SetUpgrading(true);
-                if (audioSource != null && !audioSource.isPlaying)
+                if (audioSource != null && !audioSource.isPlaying && other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeMethod() != UpgradeMethod.ButtonMash)
                 {
+                    audioSource.Play();
+                }
+                else if (audioSource != null && !audioSource.isPlaying && (progress < other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeProgress()))
+                {
+                    progress = other.gameObject.GetComponentInChildren<iDecoration>().GetUpgradeProgress();
                     audioSource.Play();
                 }
             }
@@ -219,6 +232,8 @@ public class StationTriggerAreaTest : MonoBehaviour
 
             
     }
+
+    
 
     private void Start()
     {
